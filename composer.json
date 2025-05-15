@@ -1,4 +1,15 @@
 {
+  "name": "ignite/ignite",
+  "description": "Ignite php framework",
+  "keywords": ["cms", "ignite"],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Muhammad Shoaib",
+      "email": "shoaibshokat6@gmail.com",
+      "homepage": "https://ignitecms.com"
+    }
+  ],
   "autoload": {
     "psr-4": {
       "Ignite\\": "src/"
