@@ -1,0 +1,18 @@
+RewriteEngine On
+RewriteBase /01/ignitephp
+
+# Redirect all requests to index.php if the requested file or directory doesn't exist
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ public/index.php [L,QSA]
+
+# Increase memory limit for PHP scripts
+php_value memory_limit 1024M
+
+# Increase server timeout to 600 seconds
+php_value max_execution_time 5000
+php_value max_input_time 5000
+
+# Optional: Increase post size and upload limits if needed
+php_value post_max_size 64M
+php_value upload_max_filesize 64M
