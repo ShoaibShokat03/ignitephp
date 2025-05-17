@@ -1,8 +1,9 @@
 {
   "name": "ignitephp/ignitephp",
-  "description": "Ignite php framework",
-  "keywords": ["cms", "ignite"],
+  "description": "A minimal and powerful PHP micro-framework for building high-performance APIs.",
+  "keywords": ["framework", "micro-framework", "php", "ignite", "api"],
   "license": "MIT",
+  "type": "library",
   "authors": [
     {
       "name": "Muhammad Shoaib",
@@ -16,6 +17,9 @@
     }
   },
   "require": {
+    "php": ">=8.0",
     "vlucas/phpdotenv": "^5.6"
-  }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
 }
