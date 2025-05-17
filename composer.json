@@ -1,25 +1,27 @@
 {
-  "name": "ignitephp/ignitephp",
-  "description": "A minimal and powerful PHP micro-framework for building high-performance APIs.",
-  "keywords": ["framework", "micro-framework", "php", "ignite", "api"],
+  "name": "ignitephp/project",
+  "description": "IgnitePHP starter project",
+  "type": "project",
   "license": "MIT",
-  "type": "library",
   "authors": [
     {
       "name": "Muhammad Shoaib",
-      "email": "shoaibshokat6@gmail.com",
-      "homepage": "https://ignitecms.com"
+      "email": "shoaibshokat6@gmail.com"
     }
   ],
+  "require": {
+    "ignitephp/ignitephp": "dev-main"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
   "autoload": {
     "psr-4": {
       "Ignite\\": "src/"
     }
   },
-  "require": {
-    "php": ">=8.0",
-    "vlucas/phpdotenv": "^5.6"
-  },
-  "minimum-stability": "dev",
-  "prefer-stable": true
+  "scripts": {
+    "post-create-project-cmd": [
+      "@php -r \"copy('.env.example', '.env');\""
+    ]
+  }
 }
