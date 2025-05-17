@@ -45,7 +45,16 @@
             font-size: 1.15rem;
             line-height: 1.7;
             color: #dcdcdc;
+            margin-bottom: 20px;
+        }
+
+        .note {
+            font-size: 0.95rem;
+            color: #aaa;
             margin-bottom: 30px;
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 12px;
+            border-radius: 8px;
         }
 
         .cta-button {
@@ -58,6 +67,7 @@
             cursor: pointer;
             text-decoration: none;
             transition: background-color 0.3s ease;
+            margin: 5px;
         }
 
         .cta-button:hover {
@@ -91,16 +101,34 @@
     <div class="container">
         <h1>Welcome to IgnitePHP</h1>
         <p>
-            IgnitePHP is a blazing-fast, lightweight PHP framework designed for developers who value speed, simplicity, and scalability.<br />
-            Get started building APIs and web applications with expressive routing, powerful architecture, and zero bloat.
+            IgnitePHP is a blazing-fast, lightweight PHP framework built for speed, simplicity, and seamless React integration.
         </p>
-        <div class="api-message">
-            <p id="message">Loading api message...</p>
-            <p>
-                API: <a href="api/" class="cta-button" target="_blank">Welocm Message</a>
-                API: <a href="api/hello" class="cta-button" target="_blank">Hello, World!</a>
-            </p>
+
+        <div class="note">
+            <strong>📌 Configuration Required:</strong><br>
+            If you're running IgnitePHP in a subdirectory (e.g., <code>/myproject</code>), make sure to set:
+            <ul style="text-align: left; margin-top: 10px;list-style:none;">
+                <li><strong>1. BASE_URL</strong> in <code>config/.env</code><br>
+                    Example: <code>BASE_URL="http://localhost/01/ignitephp"</code>
+                </li>
+                <li style="margin-top: 10px;"><strong>2. .htaccess</strong> Rewrite Paths:<br>
+                    Update the following lines if project is in a subdirectory:
+                    <pre>
+RewriteBase http://localhost/01/ignitephp
+RewriteCond %{REQUEST_URI} ^/01/ignitephp/api/
+                    </pre>
+                </li>
+            </ul>
+            🔄 These values help IgnitePHP route requests correctly in your environment.
         </div>
+
+        <p>Try out the default APIs:</p>
+        <div class="api-message">
+            <p id="message">Loading API message...</p>
+            <a href="api/" class="cta-button" target="_blank">Welcome API</a>
+            <a href="api/hello" class="cta-button" target="_blank">Hello, World!</a>
+        </div>
+
         <div class="tagline">Built for speed. Designed for developers.</div>
     </div>
 
@@ -108,7 +136,13 @@
         document.addEventListener("DOMContentLoaded", function() {
             fetch("api/hello")
                 .then(response => response.json())
-                .then(data => document.getElementById("message").textContent = data.message);
+                .then(data => {
+                    const msg = data.message || "API connected successfully!";
+                    document.getElementById("message").textContent = msg;
+                })
+                .catch(() => {
+                    document.getElementById("message").textContent = "API not responding. Check your setup.";
+                });
         });
     </script>
 </body>
