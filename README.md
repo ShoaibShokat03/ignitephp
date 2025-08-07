@@ -17,7 +17,11 @@
 - 📡 **JSON-first API design** with automatic response handling
 - 🔍 **Comprehensive request handling** (JSON, form-data, query params)
 - 🚀 **Lightweight core** - only essential features included
-- 🎯 **Easy to extend** for middleware, authentication, and more
+- 🎯 **Complete HTTP method support** (GET, POST, PUT, DELETE, PATCH)
+- 🎨 **Beautiful modern UI** with interactive documentation
+- 📊 **Rich dummy data** for testing and demonstration
+- 🔐 **Authentication endpoints** with JWT-style tokens
+- 📈 **Health checks and statistics** endpoints
 
 ---
 
@@ -94,7 +98,45 @@ Route::post('/users', function () {
 });
 ```
 
-### 2. Request Handling
+### 2. Complete HTTP Method Support
+
+```php
+<?php
+// routes/api.php
+
+use Ignite\Core\Route;
+use Ignite\Core\Request;
+
+// GET - Retrieve data
+Route::get('/users', function () {
+    return ['users' => $users];
+});
+
+// POST - Create data
+Route::post('/users', function () {
+    $data = Request::getJson();
+    return ['status' => 'created', 'data' => $data];
+});
+
+// PUT - Full update
+Route::put('/users/{id}', function ($id) {
+    $data = Request::getJson();
+    return ['status' => 'updated', 'id' => $id];
+});
+
+// PATCH - Partial update
+Route::patch('/users/{id}', function ($id) {
+    $data = Request::getJson();
+    return ['status' => 'partially updated', 'id' => $id];
+});
+
+// DELETE - Remove data
+Route::delete('/users/{id}', function ($id) {
+    return ['status' => 'deleted', 'id' => $id];
+});
+```
+
+### 3. Advanced Request Handling
 
 ```php
 <?php
@@ -124,38 +166,6 @@ Route::post('/api/data', function () {
 });
 ```
 
-### 3. Advanced Routing
-
-```php
-<?php
-// routes/api.php
-
-use Ignite\Core\Route;
-
-// Multiple parameters
-Route::get('/posts/{category}/{id}', function ($category, $id) {
-    return [
-        'category' => $category,
-        'post_id' => $id,
-        'title' => 'Sample Post'
-    ];
-});
-
-// Complex API endpoints
-Route::post('/api/users/{id}/profile', function ($id) {
-    $data = \Ignite\Core\Request::getJson();
-    
-    // Your business logic here
-    $profile = updateUserProfile($id, $data);
-    
-    return [
-        'status' => 'success',
-        'user_id' => $id,
-        'profile' => $profile
-    ];
-});
-```
-
 ---
 
 ## 📁 Project Structure
@@ -163,22 +173,53 @@ Route::post('/api/users/{id}/profile', function ($id) {
 ```
 ignitephp/
 ├── config/
-│   ├── cors.php          # CORS configuration
-│   └── .env              # Environment variables
-├── public/
-│   └── index.php         # API entry point
+│   └── cors.php              # CORS configuration
 ├── routes/
-│   └── api.php           # API route definitions
+│   └── api.php               # API route definitions (557 lines)
 ├── src/
 │   └── core/
-│       ├── Route.php     # Route facade
-│       ├── Router.php    # Core routing engine
-│       └── Request.php   # Request handling
-├── vendor/               # Composer dependencies
-├── .htaccess            # URL rewriting rules
-├── composer.json        # Project dependencies
-└── index.php           # Welcome page
+│       ├── Route.php         # Route facade (56 lines)
+│       ├── Router.php        # Core routing engine (51 lines)
+│       └── Request.php       # Request handling (126 lines)
+├── vendor/                   # Composer dependencies
+├── .htaccess                # URL rewriting rules
+├── composer.json            # Project dependencies
+├── index.php               # Beautiful welcome page (680 lines)
+└── README.md               # This documentation
 ```
+
+---
+
+## 🌐 API Endpoints
+
+### **📋 GET Endpoints**
+- `GET /api/` - Welcome message with API documentation
+- `GET /api/hello` - Simple greeting endpoint
+- `GET /api/users` - Get all users with pagination
+- `GET /api/users/{id}` - Get specific user with profile
+- `GET /api/posts` - Get all posts
+- `GET /api/posts/{id}` - Get specific post with comments
+- `GET /api/search/users` - Search users by query
+- `GET /api/health` - Health check endpoint
+- `GET /api/stats` - API statistics
+
+### **➕ POST Endpoints**
+- `POST /api/users` - Create new user
+- `POST /api/posts` - Create new post
+- `POST /api/auth/login` - Authentication endpoint
+- `POST /api/echo` - Echo endpoint for testing
+
+### **🔄 PUT Endpoints**
+- `PUT /api/users/{id}` - Full user update
+- `PUT /api/posts/{id}` - Full post update
+
+### **🔧 PATCH Endpoints**
+- `PATCH /api/users/{id}` - Partial user update
+- `PATCH /api/posts/{id}` - Partial post update
+
+### **🗑️ DELETE Endpoints**
+- `DELETE /api/users/{id}` - Delete user
+- `DELETE /api/posts/{id}` - Delete post
 
 ---
 
@@ -211,6 +252,90 @@ Create `config/.env` for environment-specific settings:
 BASE_URL="http://localhost/your-project"
 APP_ENV="development"
 APP_DEBUG="true"
+```
+
+---
+
+## 🧪 Testing Your API
+
+### Using cURL
+
+```bash
+# Welcome message
+curl http://localhost/your-project/api/
+
+# Get all users
+curl http://localhost/your-project/api/users
+
+# Get specific user
+curl http://localhost/your-project/api/users/1
+
+# Create user
+curl -X POST http://localhost/your-project/api/users \
+  -H "Content-Type: application/json" \
+  -d '{"name": "John Doe", "email": "john@example.com"}'
+
+# Update user
+curl -X PUT http://localhost/your-project/api/users/1 \
+  -H "Content-Type: application/json" \
+  -d '{"name": "John Updated", "email": "john.updated@example.com"}'
+
+# Delete user
+curl -X DELETE http://localhost/your-project/api/users/1
+
+# Health check
+curl http://localhost/your-project/api/health
+```
+
+### Using the Beautiful UI
+
+Visit `http://localhost/your-project/` to access the interactive documentation with:
+- **Real-time API testing**
+- **Status indicators**
+- **Interactive endpoint cards**
+- **Configuration guides**
+
+---
+
+## 📊 Example Responses
+
+### User Data
+```json
+{
+  "status": "success",
+  "data": {
+    "id": 1,
+    "name": "John Doe",
+    "email": "john.doe@example.com",
+    "role": "admin",
+    "created_at": "2024-01-15T10:30:00Z",
+    "status": "active",
+    "profile": {
+      "avatar": "https://example.com/avatars/john.jpg",
+      "bio": "Full-stack developer with 5+ years of experience",
+      "location": "San Francisco, CA",
+      "website": "https://johndoe.dev"
+    }
+  }
+}
+```
+
+### Authentication Response
+```json
+{
+  "status": "success",
+  "message": "Login successful",
+  "data": {
+    "user": {
+      "id": 1,
+      "name": "Admin User",
+      "email": "admin@example.com",
+      "role": "admin"
+    },
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+    "expires_at": "2024-01-16T10:30:00Z"
+  }
+}
 ```
 
 ---
@@ -272,54 +397,28 @@ Route::get('/protected/{id}', function ($id) {
 });
 ```
 
----
+### Search with Query Parameters
 
-## 🌐 API Examples
+```php
+<?php
+// routes/api.php
 
-### Testing Your API
+Route::get('/search/users', function () {
+    $query = Request::getQueryParams()['q'] ?? '';
+    
+    // Filter users based on query
+    $filtered = array_filter($users, function($user) use ($query) {
+        return stripos($user['name'], $query) !== false || 
+               stripos($user['email'], $query) !== false;
+    });
 
-Once your server is running, test the default endpoints:
-
-```bash
-# Welcome message
-curl http://localhost/your-project/api/
-
-# Hello world
-curl http://localhost/your-project/api/hello
-
-# Dynamic parameter
-curl http://localhost/your-project/api/user/123
-
-# POST with JSON
-curl -X POST http://localhost/your-project/api/users \
-  -H "Content-Type: application/json" \
-  -d '{"name": "John", "email": "john@example.com"}'
-```
-
-### Expected Responses
-
-```json
-// GET /api/
-{
-  "message": "Welcome to Ignite!"
-}
-
-// GET /api/user/123
-{
-  "user_id": "123",
-  "name": "John Doe",
-  "email": "john@example.com"
-}
-
-// POST /api/users
-{
-  "status": "success",
-  "data": {
-    "name": "John",
-    "email": "john@example.com"
-  },
-  "message": "User created successfully"
-}
+    return [
+        'status' => 'success',
+        'data' => array_values($filtered),
+        'query' => $query,
+        'total' => count($filtered)
+    ];
+});
 ```
 
 ---
@@ -333,6 +432,22 @@ IgnitePHP is designed for maximum performance:
 - **Minimal overhead** - No unnecessary abstractions
 - **Memory efficient** - Static property usage for request handling
 - **Zero external dependencies** - Except Composer autoloader
+- **Optimized request handling** - Efficient JSON and form data parsing
+
+---
+
+## 🎨 Beautiful UI Features
+
+The framework includes a stunning welcome page with:
+
+- **Modern glassmorphism design** with backdrop blur effects
+- **Interactive API testing** with real-time status indicators
+- **Responsive grid layouts** for features and endpoints
+- **Professional typography** using Inter font
+- **Smooth animations** and hover effects
+- **Color-coded HTTP methods** (GET, POST, PUT, DELETE, PATCH)
+- **Configuration guides** with step-by-step instructions
+- **Mobile-first responsive design**
 
 ---
 
@@ -396,6 +511,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **Email:** shoaibshokat6@gmail.com
 - **Inspired by:** FastAPI (Python)
 - **Built with:** PHP 8.0+, Composer
+- **UI Design:** Modern glassmorphism with CSS variables
 
 ---
 

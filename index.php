@@ -436,6 +436,254 @@
             }
         }
 
+        /* Routes Section */
+        .routes-section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius-2xl);
+            padding: var(--spacing-2xl);
+            margin: var(--spacing-3xl) 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .section-description {
+            text-align: center;
+            color: var(--gray-300);
+            margin-bottom: var(--spacing-xl);
+            font-size: 1.1rem;
+        }
+
+        /* Routes Navigation */
+        .routes-nav {
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-xl);
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--white);
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--radius-lg);
+            cursor: pointer;
+            transition: var(--transition-normal);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .nav-btn.active {
+            background: var(--gradient-primary);
+            border-color: transparent;
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Routes Categories */
+        .routes-category {
+            display: none;
+            margin-bottom: var(--spacing-2xl);
+        }
+
+        .routes-category.active {
+            display: block;
+        }
+
+        .category-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: var(--spacing-lg);
+            color: var(--white);
+            text-align: center;
+        }
+
+        /* Routes Grid */
+        .routes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: var(--spacing-lg);
+        }
+
+        .route-card {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition-normal);
+        }
+
+        .route-card:hover {
+            background: rgba(255, 255, 255, 0.12);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .route-header {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .method-badge {
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border-radius: var(--radius-sm);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .method-get {
+            background: var(--success);
+            color: var(--white);
+        }
+
+        .method-post {
+            background: var(--accent);
+            color: var(--white);
+        }
+
+        .method-put {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .method-patch {
+            background: var(--warning);
+            color: var(--white);
+        }
+
+        .method-delete {
+            background: var(--error);
+            color: var(--white);
+        }
+
+        .endpoint-path {
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9rem;
+            color: var(--accent-light);
+            font-weight: 500;
+        }
+
+        .route-content h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: var(--spacing-sm);
+            color: var(--white);
+        }
+
+        .route-content p {
+            color: var(--gray-300);
+            font-size: 0.9rem;
+            margin-bottom: var(--spacing-md);
+            line-height: 1.5;
+        }
+
+        .route-actions {
+            display: flex;
+            gap: var(--spacing-sm);
+        }
+
+        .route-link {
+            background: var(--gradient-primary);
+            color: var(--white);
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 500;
+            transition: var(--transition-fast);
+            border: none;
+            cursor: pointer;
+        }
+
+        .route-link:hover {
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .route-docs-btn {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border-radius: var(--radius-sm);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 0.8rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition-fast);
+        }
+
+        .route-docs-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: var(--dark-light);
+            margin: 5% auto;
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-xl);
+            width: 90%;
+            max-width: 600px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+
+        .close {
+            color: var(--gray-400);
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            position: absolute;
+            right: var(--spacing-lg);
+            top: var(--spacing-md);
+        }
+
+        .close:hover {
+            color: var(--white);
+        }
+
+        .modal h3 {
+            color: var(--white);
+            margin-bottom: var(--spacing-lg);
+            font-size: 1.5rem;
+        }
+
+        .modal-detail {
+            margin-bottom: var(--spacing-md);
+        }
+
+        .modal-detail strong {
+            color: var(--accent-light);
+            display: inline-block;
+            width: 120px;
+        }
+
+        .modal-detail span {
+            color: var(--gray-300);
+        }
+
         /* Loading Animation */
         .loading {
             display: inline-block;
@@ -468,6 +716,10 @@
                 <a href="#api-testing" class="btn btn-primary">
                     <span>🧪</span>
                     Test APIs
+                </a>
+                <a href="#routes" class="btn btn-secondary">
+                    <span>📋</span>
+                    All Routes
                 </a>
                 <a href="https://github.com/ShoaibShokat03/ignitephp" class="btn btn-secondary" target="_blank">
                     <span>📚</span>
@@ -579,6 +831,337 @@
             </div>
         </section>
 
+        <!-- Routes Documentation Section -->
+        <section id="routes" class="routes-section">
+            <h2 class="section-title">📋 API Routes Documentation</h2>
+            <p class="section-description">Complete list of all available API endpoints with HTTP methods and descriptions.</p>
+            
+            <!-- Routes Navigation -->
+            <div class="routes-nav">
+                <button class="nav-btn active" data-category="all">All Routes</button>
+                <button class="nav-btn" data-category="get">GET</button>
+                <button class="nav-btn" data-category="post">POST</button>
+                <button class="nav-btn" data-category="put">PUT</button>
+                <button class="nav-btn" data-category="patch">PATCH</button>
+                <button class="nav-btn" data-category="delete">DELETE</button>
+            </div>
+
+            <!-- GET Routes -->
+            <div class="routes-category" data-category="get">
+                <h3 class="category-title">📋 GET Endpoints</h3>
+                <div class="routes-grid">
+                    <div class="route-card" data-method="GET" data-endpoint="/api/">
+                        <div class="route-header">
+                            <span class="method-badge method-get">GET</span>
+                            <span class="endpoint-path">/api/</span>
+                        </div>
+                        <div class="route-content">
+                            <h4>Welcome Message</h4>
+                            <p>Welcome message with API documentation</p>
+                            <div class="route-actions">
+                                <a href="api/" class="route-link" target="_blank">Test</a>
+                                <button class="route-docs-btn" onclick="showRouteDetails('GET', '/api/', 'Welcome message with API documentation', 'None', 'None')">Docs</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="route-card" data-method="GET" data-endpoint="/api/hello">
+                        <div class="route-header">
+                            <span class="method-badge method-get">GET</span>
+                            <span class="endpoint-path">/api/hello</span>
+                        </div>
+                        <div class="route-content">
+                            <h4>Hello World</h4>
+                            <p>Simple greeting endpoint</p>
+                            <div class="route-actions">
+                                <a href="api/hello" class="route-link" target="_blank">Test</a>
+                                <button class="route-docs-btn" onclick="showRouteDetails('GET', '/api/hello', 'Simple greeting endpoint', 'None', 'None')">Docs</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="route-card" data-method="GET" data-endpoint="/api/users">
+                        <div class="route-header">
+                            <span class="method-badge method-get">GET</span>
+                            <span class="endpoint-path">/api/users</span>
+                        </div>
+                        <div class="route-content">
+                            <h4>Get All Users</h4>
+                            <p>Retrieve all users with pagination</p>
+                            <div class="route-actions">
+                                <a href="api/users" class="route-link" target="_blank">Test</a>
+                                <button class="route-docs-btn" onclick="showRouteDetails('GET', '/api/users', 'Retrieve all users with pagination', 'None', 'None')">Docs</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="route-card" data-method="GET" data-endpoint="/api/users/{id}">
+                        <div class="route-header">
+                            <span class="method-badge method-get">GET</span>
+                            <span class="endpoint-path">/api/users/{id}</span>
+                        </div>
+                        <div class="route-content">
+                            <h4>Get User by ID</h4>
+                            <p>Retrieve specific user with detailed profile</p>
+                            <div class="route-actions">
+                                <a href="api/users/1" class="route-link" target="_blank">Test</a>
+                                <button class="route-docs-btn" onclick="showRouteDetails('GET', '/api/users/{id}', 'Retrieve specific user with detailed profile', 'id (path parameter)', 'None')">Docs</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="route-card" data-method="GET" data-endpoint="/api/posts">
+                        <div class="route-header">
+                            <span class="method-badge method-get">GET</span>
+                            <span class="endpoint-path">/api/posts</span>
+                        </div>
+                        <div class="route-content">
+                            <h4>Get All Posts</h4>
+                            <p>Retrieve all posts with metadata</p>
+                            <div class="route-actions">
+                                <a href="api/posts" class="route-link" target="_blank">Test</a>
+                                <button class="route-docs-btn" onclick="showRouteDetails('GET', '/api/posts', 'Retrieve all posts with metadata', 'None', 'None')">Docs</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="route-card" data-method="GET" data-endpoint="/api/posts/{id}">
+                        <div class="route-header">
+                            <span class="method-badge method-get">GET</span>
+                            <span class="endpoint-path">/api/posts/{id}</span>
+                        </div>
+                        <div class="route-content">
+                            <h4>Get Post by ID</h4>
+                            <p>Retrieve specific post with comments</p>
+                            <div class="route-actions">
+                                <a href="api/posts/1" class="route-link" target="_blank">Test</a>
+                                <button class="route-docs-btn" onclick="showRouteDetails('GET', '/api/posts/{id}', 'Retrieve specific post with comments', 'id (path parameter)', 'None')">Docs</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="route-card" data-method="GET" data-endpoint="/api/search/users">
+                        <div class="route-header">
+                            <span class="method-badge method-get">GET</span>
+                            <span class="endpoint-path">/api/search/users</span>
+                        </div>
+                        <div class="route-content">
+                            <h4>Search Users</h4>
+                            <p>Search users by name or email</p>
+                            <div class="route-actions">
+                                <a href="api/search/users?q=john" class="route-link" target="_blank">Test</a>
+                                <button class="route-docs-btn" onclick="showRouteDetails('GET', '/api/search/users', 'Search users by name or email', 'q (query parameter)', 'None')">Docs</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="route-card" data-method="GET" data-endpoint="/api/health">
+                        <div class="route-header">
+                            <span class="method-badge method-get">GET</span>
+                            <span class="endpoint-path">/api/health</span>
+                        </div>
+                        <div class="route-content">
+                            <h4>Health Check</h4>
+                            <p>API health status</p>
+                            <div class="route-actions">
+                                <a href="api/health" class="route-link" target="_blank">Test</a>
+                                <button class="route-docs-btn" onclick="showRouteDetails('GET', '/api/health', 'API health status', 'None', 'None')">Docs</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="route-card" data-method="GET" data-endpoint="/api/stats">
+                        <div class="route-header">
+                            <span class="method-badge method-get">GET</span>
+                            <span class="endpoint-path">/api/stats</span>
+                        </div>
+                        <div class="route-content">
+                            <h4>API Statistics</h4>
+                            <p>API usage statistics</p>
+                            <div class="route-actions">
+                                <a href="api/stats" class="route-link" target="_blank">Test</a>
+                                <button class="route-docs-btn" onclick="showRouteDetails('GET', '/api/stats', 'API usage statistics', 'None', 'None')">Docs</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- POST Routes -->
+            <div class="routes-category" data-category="post">
+                <h3 class="category-title">➕ POST Endpoints</h3>
+                <div class="routes-grid">
+                    <div class="route-card" data-method="POST" data-endpoint="/api/users">
+                        <div class="route-header">
+                            <span class="method-badge method-post">POST</span>
+                            <span class="endpoint-path">/api/users</span>
+                        </div>
+                        <div class="route-content">
+                            <h4>Create User</h4>
+                            <p>Create a new user</p>
+                            <div class="route-actions">
+                                <button class="route-link" onclick="testPostEndpoint('/api/users', 'Create User')">Test</button>
+                                <button class="route-docs-btn" onclick="showRouteDetails('POST', '/api/users', 'Create a new user', 'None', 'Content-Type: application/json')">Docs</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="route-card" data-method="POST" data-endpoint="/api/posts">
+                        <div class="route-header">
+                            <span class="method-badge method-post">POST</span>
+                            <span class="endpoint-path">/api/posts</span>
+                        </div>
+                        <div class="route-content">
+                            <h4>Create Post</h4>
+                            <p>Create a new post</p>
+                            <div class="route-actions">
+                                <button class="route-link" onclick="testPostEndpoint('/api/posts', 'Create Post')">Test</button>
+                                <button class="route-docs-btn" onclick="showRouteDetails('POST', '/api/posts', 'Create a new post', 'None', 'Content-Type: application/json')">Docs</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="route-card" data-method="POST" data-endpoint="/api/auth/login">
+                        <div class="route-header">
+                            <span class="method-badge method-post">POST</span>
+                            <span class="endpoint-path">/api/auth/login</span>
+                        </div>
+                        <div class="route-content">
+                            <h4>User Login</h4>
+                            <p>Authenticate user and get access token</p>
+                            <div class="route-actions">
+                                <button class="route-link" onclick="testLoginEndpoint()">Test</button>
+                                <button class="route-docs-btn" onclick="showRouteDetails('POST', '/api/auth/login', 'Authenticate user and get access token', 'None', 'Content-Type: application/json')">Docs</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="route-card" data-method="POST" data-endpoint="/api/echo">
+                        <div class="route-header">
+                            <span class="method-badge method-post">POST</span>
+                            <span class="endpoint-path">/api/echo</span>
+                        </div>
+                        <div class="route-content">
+                            <h4>Echo Test</h4>
+                            <p>Echo back request data for testing</p>
+                            <div class="route-actions">
+                                <button class="route-link" onclick="testEchoEndpoint()">Test</button>
+                                <button class="route-docs-btn" onclick="showRouteDetails('POST', '/api/echo', 'Echo back request data for testing', 'None', 'Content-Type: application/json')">Docs</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PUT Routes -->
+            <div class="routes-category" data-category="put">
+                <h3 class="category-title">🔄 PUT Endpoints</h3>
+                <div class="routes-grid">
+                    <div class="route-card" data-method="PUT" data-endpoint="/api/users/{id}">
+                        <div class="route-header">
+                            <span class="method-badge method-put">PUT</span>
+                            <span class="endpoint-path">/api/users/{id}</span>
+                        </div>
+                        <div class="route-content">
+                            <h4>Update User</h4>
+                            <p>Fully update a user (all fields required)</p>
+                            <div class="route-actions">
+                                <button class="route-link" onclick="testPutEndpoint('/api/users/1', 'Update User')">Test</button>
+                                <button class="route-docs-btn" onclick="showRouteDetails('PUT', '/api/users/{id}', 'Fully update a user', 'id (path parameter)', 'Content-Type: application/json')">Docs</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="route-card" data-method="PUT" data-endpoint="/api/posts/{id}">
+                        <div class="route-header">
+                            <span class="method-badge method-put">PUT</span>
+                            <span class="endpoint-path">/api/posts/{id}</span>
+                        </div>
+                        <div class="route-content">
+                            <h4>Update Post</h4>
+                            <p>Fully update a post (all fields required)</p>
+                            <div class="route-actions">
+                                <button class="route-link" onclick="testPutEndpoint('/api/posts/1', 'Update Post')">Test</button>
+                                <button class="route-docs-btn" onclick="showRouteDetails('PUT', '/api/posts/{id}', 'Fully update a post', 'id (path parameter)', 'Content-Type: application/json')">Docs</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PATCH Routes -->
+            <div class="routes-category" data-category="patch">
+                <h3 class="category-title">🔧 PATCH Endpoints</h3>
+                <div class="routes-grid">
+                    <div class="route-card" data-method="PATCH" data-endpoint="/api/users/{id}">
+                        <div class="route-header">
+                            <span class="method-badge method-patch">PATCH</span>
+                            <span class="endpoint-path">/api/users/{id}</span>
+                        </div>
+                        <div class="route-content">
+                            <h4>Partially Update User</h4>
+                            <p>Partially update a user (only provided fields)</p>
+                            <div class="route-actions">
+                                <button class="route-link" onclick="testPatchEndpoint('/api/users/1', 'Partially Update User')">Test</button>
+                                <button class="route-docs-btn" onclick="showRouteDetails('PATCH', '/api/users/{id}', 'Partially update a user', 'id (path parameter)', 'Content-Type: application/json')">Docs</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="route-card" data-method="PATCH" data-endpoint="/api/posts/{id}">
+                        <div class="route-header">
+                            <span class="method-badge method-patch">PATCH</span>
+                            <span class="endpoint-path">/api/posts/{id}</span>
+                        </div>
+                        <div class="route-content">
+                            <h4>Partially Update Post</h4>
+                            <p>Partially update a post (only provided fields)</p>
+                            <div class="route-actions">
+                                <button class="route-link" onclick="testPatchEndpoint('/api/posts/1', 'Partially Update Post')">Test</button>
+                                <button class="route-docs-btn" onclick="showRouteDetails('PATCH', '/api/posts/{id}', 'Partially update a post', 'id (path parameter)', 'Content-Type: application/json')">Docs</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DELETE Routes -->
+            <div class="routes-category" data-category="delete">
+                <h3 class="category-title">🗑️ DELETE Endpoints</h3>
+                <div class="routes-grid">
+                    <div class="route-card" data-method="DELETE" data-endpoint="/api/users/{id}">
+                        <div class="route-header">
+                            <span class="method-badge method-delete">DELETE</span>
+                            <span class="endpoint-path">/api/users/{id}</span>
+                        </div>
+                        <div class="route-content">
+                            <h4>Delete User</h4>
+                            <p>Delete a user</p>
+                            <div class="route-actions">
+                                <button class="route-link" onclick="testDeleteEndpoint('/api/users/1', 'Delete User')">Test</button>
+                                <button class="route-docs-btn" onclick="showRouteDetails('DELETE', '/api/users/{id}', 'Delete a user', 'id (path parameter)', 'None')">Docs</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="route-card" data-method="DELETE" data-endpoint="/api/posts/{id}">
+                        <div class="route-header">
+                            <span class="method-badge method-delete">DELETE</span>
+                            <span class="endpoint-path">/api/posts/{id}</span>
+                        </div>
+                        <div class="route-content">
+                            <h4>Delete Post</h4>
+                            <p>Delete a post</p>
+                            <div class="route-actions">
+                                <button class="route-link" onclick="testDeleteEndpoint('/api/posts/1', 'Delete Post')">Test</button>
+                                <button class="route-docs-btn" onclick="showRouteDetails('DELETE', '/api/posts/{id}', 'Delete a post', 'id (path parameter)', 'None')">Docs</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Configuration Section -->
         <section class="config-section">
             <h3 class="config-title">
@@ -621,6 +1204,34 @@
             <p>Built with ❤️ by Muhammad Shoaib</p>
             <p>Inspired by FastAPI • Powered by PHP 8.0+</p>
         </footer>
+    </div>
+
+    <!-- Modal for Route Details -->
+    <div id="routeModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3 id="modalTitle">Route Details</h3>
+            <div class="modal-detail">
+                <strong>Method:</strong>
+                <span id="modalMethod"></span>
+            </div>
+            <div class="modal-detail">
+                <strong>Endpoint:</strong>
+                <span id="modalEndpoint"></span>
+            </div>
+            <div class="modal-detail">
+                <strong>Description:</strong>
+                <span id="modalDescription"></span>
+            </div>
+            <div class="modal-detail">
+                <strong>Parameters:</strong>
+                <span id="modalParameters"></span>
+            </div>
+            <div class="modal-detail">
+                <strong>Headers:</strong>
+                <span id="modalHeaders"></span>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -673,7 +1284,225 @@
                     }
                 });
             });
+
+            // Routes Navigation
+            const navBtns = document.querySelectorAll('.nav-btn');
+            const routeCategories = document.querySelectorAll('.routes-category');
+
+            navBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const category = this.getAttribute('data-category');
+                    
+                    // Update active button
+                    navBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Show/hide categories
+                    routeCategories.forEach(cat => {
+                        cat.classList.remove('active');
+                        if (category === 'all' || cat.getAttribute('data-category') === category) {
+                            cat.classList.add('active');
+                        }
+                    });
+                });
+            });
+
+            // Show all categories by default
+            document.querySelector('[data-category="all"]').click();
+
+            // Modal functionality
+            const modal = document.getElementById('routeModal');
+            const closeBtn = document.querySelector('.close');
+
+            closeBtn.onclick = function() {
+                modal.style.display = "none";
+            }
+
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
         });
+
+        // Global functions for route testing and documentation
+        function showRouteDetails(method, endpoint, description, parameters, headers) {
+            document.getElementById('modalTitle').textContent = `${method} ${endpoint}`;
+            document.getElementById('modalMethod').textContent = method;
+            document.getElementById('modalEndpoint').textContent = endpoint;
+            document.getElementById('modalDescription').textContent = description;
+            document.getElementById('modalParameters').textContent = parameters;
+            document.getElementById('modalHeaders').textContent = headers;
+            
+            document.getElementById('routeModal').style.display = "block";
+        }
+
+        function testPostEndpoint(endpoint, title) {
+            const payload = getDefaultPayload(title);
+            
+            fetch(endpoint, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(payload)
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(`${title} Response:\n${JSON.stringify(data, null, 2)}`);
+            })
+            .catch(error => {
+                alert(`Error testing ${title}: ${error.message}`);
+            });
+        }
+
+        function testPutEndpoint(endpoint, title) {
+            const payload = getDefaultPayload(title);
+            
+            fetch(endpoint, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(payload)
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(`${title} Response:\n${JSON.stringify(data, null, 2)}`);
+            })
+            .catch(error => {
+                alert(`Error testing ${title}: ${error.message}`);
+            });
+        }
+
+        function testPatchEndpoint(endpoint, title) {
+            const payload = getDefaultPayload(title);
+            
+            fetch(endpoint, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(payload)
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(`${title} Response:\n${JSON.stringify(data, null, 2)}`);
+            })
+            .catch(error => {
+                alert(`Error testing ${title}: ${error.message}`);
+            });
+        }
+
+        function testDeleteEndpoint(endpoint, title) {
+            if (confirm(`Are you sure you want to test ${title}?`)) {
+                fetch(endpoint, {
+                    method: 'DELETE'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert(`${title} Response:\n${JSON.stringify(data, null, 2)}`);
+                })
+                .catch(error => {
+                    alert(`Error testing ${title}: ${error.message}`);
+                });
+            }
+        }
+
+        function testLoginEndpoint() {
+            const payload = {
+                email: 'admin@example.com',
+                password: 'password'
+            };
+            
+            fetch('/api/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(payload)
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(`Login Response:\n${JSON.stringify(data, null, 2)}`);
+            })
+            .catch(error => {
+                alert(`Error testing login: ${error.message}`);
+            });
+        }
+
+        function testEchoEndpoint() {
+            const payload = {
+                test: 'data',
+                message: 'Hello from IgnitePHP!',
+                timestamp: new Date().toISOString()
+            };
+            
+            fetch('/api/echo', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(payload)
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(`Echo Response:\n${JSON.stringify(data, null, 2)}`);
+            })
+            .catch(error => {
+                alert(`Error testing echo: ${error.message}`);
+            });
+        }
+
+        function getDefaultPayload(title) {
+            switch(title) {
+                case 'Create User':
+                    return {
+                        name: 'Test User',
+                        email: 'test@example.com',
+                        role: 'user'
+                    };
+                case 'Create Post':
+                    return {
+                        title: 'Test Post',
+                        content: 'This is a test post content.',
+                        author_id: 1,
+                        author_name: 'Test Author',
+                        tags: ['test', 'demo']
+                    };
+                case 'Update User':
+                    return {
+                        name: 'Updated Test User',
+                        email: 'updated@example.com',
+                        role: 'moderator',
+                        status: 'active'
+                    };
+                case 'Update Post':
+                    return {
+                        title: 'Updated Test Post',
+                        content: 'This is an updated test post content.',
+                        author_id: 1,
+                        author_name: 'Updated Author',
+                        tags: ['updated', 'test'],
+                        likes: 10,
+                        comments: 5
+                    };
+                case 'Partially Update User':
+                    return {
+                        name: 'Partially Updated User'
+                    };
+                case 'Partially Update Post':
+                    return {
+                        title: 'Partially Updated Post',
+                        likes: 25
+                    };
+                default:
+                    return {
+                        test: 'data',
+                        message: 'Test payload'
+                    };
+            }
+        }
     </script>
 </body>
 
