@@ -27,6 +27,24 @@ class Route
         self::$router->add('POST', $path, $handler);
     }
 
+    public static function put(string $path, callable $handler): void
+    {
+        self::init();
+        self::$router->add('PUT', $path, $handler);
+    }
+
+    public static function delete(string $path, callable $handler): void
+    {
+        self::init();
+        self::$router->add('DELETE', $path, $handler);
+    }
+
+    public static function patch(string $path, callable $handler): void
+    {
+        self::init();
+        self::$router->add('PATCH', $path, $handler);
+    }
+
     public static function dispatch()
     {
         self::init();
