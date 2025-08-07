@@ -18,8 +18,11 @@ class Router
 
     public function dispatch(string $method, string $uri)
     {
+        $basePath = rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'])), '/');
+        $basePath = str_replace("/public", "", $basePath);
+
         // Remove base path
-        $targetRoute = str_replace($_ENV['BASE_URL'].'/api/', '/', $uri);
+        $targetRoute = str_replace($basePath . '/api/', '/', $uri);
 
         foreach ($this->routes as $route) {
             if ($route['method'] !== strtoupper($method)) continue;
