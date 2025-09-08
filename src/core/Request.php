@@ -9,6 +9,13 @@ class Request
     protected static $body;
     protected static $queryParams;
     protected static $parsedBody;
+    protected static $files;
+
+    protected static $get;
+    protected static $post;
+    protected static $put;
+    protected static $delete;
+    protected static $patch;
 
     // Initialize static properties on first use
     protected static function init()
@@ -17,6 +24,12 @@ class Request
             self::$method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
             self::$headers = self::getAllHeaders();
             self::$queryParams = $_GET ?? [];
+            self::$get = $_GET ?? [];
+            self::$post = $_POST ?? [];
+            self::$put = $_PUT ?? [];
+            self::$delete = $_DELETE ?? [];
+            self::$patch = $_PATCH ?? [];
+            self::$files = $_FILES ?? [];
             self::$body = file_get_contents('php://input');
             self::$parsedBody = self::parseBody();
         }
@@ -48,6 +61,52 @@ class Request
         }
         return null;
     }
+
+    public static function get($key=null)
+    {
+        self::init();
+        if ($key !== null) {
+            return self::$get[$key];
+        }
+        return self::$get;
+    }
+
+    public static function post($key)
+    {
+        self::init();
+        if ($key !== null) {
+            return self::$post[$key];
+        }
+        return self::$post;
+    }
+
+    public static function put() 
+    {
+        self::init();
+        return self::$put;
+    }
+
+    public static function delete() 
+    {
+        self::init();
+        return self::$delete;
+    }
+
+    public static function patch() 
+    {
+        self::init();
+        return self::$patch;
+    }
+
+    public static function files($key=null) 
+    {
+        self::init();
+        if ($key !== null) {
+            return self::$files[$key];
+        }
+        return self::$files;
+    }
+
 
     // Get query parameters ($_GET)
     public static function getQueryParams(): array

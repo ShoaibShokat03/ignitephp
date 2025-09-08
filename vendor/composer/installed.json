@@ -24,7 +24,7 @@
             },
             "time": "2024-07-20T21:45:45+00:00",
             "type": "library",
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "GrahamCampbell\\ResultType\\": "src/"
@@ -66,6 +66,47 @@
             "install-path": "../graham-campbell/result-type"
         },
         {
+            "name": "ignitephp/ignitephp",
+            "version": "dev-main",
+            "version_normalized": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ShoaibShokat03/ignitephp.git",
+                "reference": "e10d23032afe7be072e1d643962cd17752da2890"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ShoaibShokat03/ignitephp/zipball/e10d23032afe7be072e1d643962cd17752da2890",
+                "reference": "e10d23032afe7be072e1d643962cd17752da2890",
+                "shasum": ""
+            },
+            "time": "2025-08-07T19:44:26+00:00",
+            "default-branch": true,
+            "type": "project",
+            "installation-source": "source",
+            "autoload": {
+                "psr-4": {
+                    "Ignite\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Muhammad Shoaib",
+                    "email": "shoaibshokat6@gmail.com"
+                }
+            ],
+            "description": "IgnitePHP starter project",
+            "support": {
+                "issues": "https://github.com/ShoaibShokat03/ignitephp/issues",
+                "source": "https://github.com/ShoaibShokat03/ignitephp/tree/main"
+            },
+            "install-path": "../ignitephp/ignitephp"
+        },
+        {
             "name": "phpoption/phpoption",
             "version": "1.9.3",
             "version_normalized": "1.9.3.0",
@@ -98,7 +139,7 @@
                     "dev-master": "1.9-dev"
                 }
             },
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "PhpOption\\": "src/PhpOption/"
@@ -175,7 +216,7 @@
                     "name": "symfony/polyfill"
                 }
             },
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "files": [
                     "bootstrap.php"
@@ -258,7 +299,7 @@
                     "name": "symfony/polyfill"
                 }
             },
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "files": [
                     "bootstrap.php"
@@ -335,7 +376,7 @@
                     "name": "symfony/polyfill"
                 }
             },
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "files": [
                     "bootstrap.php"
@@ -435,7 +476,7 @@
                     "dev-master": "5.6-dev"
                 }
             },
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "Dotenv\\": "src/"

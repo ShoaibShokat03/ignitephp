@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "108be68e4e2b97fed51d36a10eed0849",
+    "content-hash": "6a8ec1fec65340e9db5a743540fb478a",
     "packages": [
         {
             "name": "graham-campbell/result-type",
@@ -67,6 +67,44 @@
                 }
             ],
             "time": "2024-07-20T21:45:45+00:00"
+        },
+        {
+            "name": "ignitephp/ignitephp",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ShoaibShokat03/ignitephp.git",
+                "reference": "e10d23032afe7be072e1d643962cd17752da2890"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ShoaibShokat03/ignitephp/zipball/e10d23032afe7be072e1d643962cd17752da2890",
+                "reference": "e10d23032afe7be072e1d643962cd17752da2890",
+                "shasum": ""
+            },
+            "default-branch": true,
+            "type": "project",
+            "autoload": {
+                "psr-4": {
+                    "Ignite\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Muhammad Shoaib",
+                    "email": "shoaibshokat6@gmail.com"
+                }
+            ],
+            "description": "IgnitePHP starter project",
+            "support": {
+                "issues": "https://github.com/ShoaibShokat03/ignitephp/issues",
+                "source": "https://github.com/ShoaibShokat03/ignitephp/tree/main"
+            },
+            "time": "2025-08-07T19:44:26+00:00"
         },
         {
             "name": "phpoption/phpoption",
@@ -470,11 +508,13 @@
     ],
     "packages-dev": [],
     "aliases": [],
-    "minimum-stability": "stable",
-    "stability-flags": [],
-    "prefer-stable": false,
+    "minimum-stability": "dev",
+    "stability-flags": {
+        "ignitephp/ignitephp": 20
+    },
+    "prefer-stable": true,
     "prefer-lowest": false,
-    "platform": [],
-    "platform-dev": [],
+    "platform": {},
+    "platform-dev": {},
     "plugin-api-version": "2.6.0"
 }
