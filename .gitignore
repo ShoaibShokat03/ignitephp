@@ -1,0 +1,43 @@
+# OS / Editor junk
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+*.swp
+*.swo
+*.bak
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Build / Dist
+dist/
+build/
+.out/
+.next/
+.cache/
+coverage/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# PHP
+/vendor/
+composer.lock
+
+# IDE / Editor
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Others
+*.zip
+*.tar.gz
+*.tgz
