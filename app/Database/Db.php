@@ -12,13 +12,15 @@ class Db
     private $password;
     private $db;
     private $conn;
+    public $db_name;
 
     public function __construct()
     {
         $this->localhost = "localhost";
-        $this->username  = "root";
-        $this->password  = "";
-        $this->db        = "dentaldoctors";
+        $this->username = "root";
+        $this->password = "";
+        $this->db = "enteryourdatabase";
+        $this->db_name = $this->db;
     }
 
     public function connect()
@@ -28,6 +30,14 @@ class Db
         if ($this->conn->connect_error) {
             die("Connection failed: " . $this->conn->connect_error);
         }
+    }
+    public function insert_id()
+    {
+        return $this->conn->insert_id;
+    }
+    public function getConnection()
+    {
+        return $this->conn;
     }
 
     public function query($sql)
@@ -47,7 +57,8 @@ class Db
             $this->conn->close();
         }
     }
-    public function error(){
+    public function error()
+    {
         return $this->conn->error;
     }
 }

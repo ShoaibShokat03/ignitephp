@@ -3,7 +3,7 @@ if (file_exists(__DIR__ . '/vendor/autoload.php')) {
     require __DIR__ . '/vendor/autoload.php';
 }
 
-use Ignite\Core\Route;
+use Ignitephp\Core\Route;
 use Dotenv\Dotenv;
 
 try {
@@ -41,7 +41,7 @@ try {
     header("X-Frame-Options: DENY");
     header("X-XSS-Protection: 1; mode=block");
     header("Referrer-Policy: no-referrer-when-downgrade");
-    header("Content-Security-Policy: default-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'");
+    header("Content-Security-Policy: default-src 'self'; frame-ancestors 'none'; base-uri 'none'");
 
     // 🛡 Block dangerous HTTP methods
     $badMethods = ['TRACE', 'CONNECT', 'PATCH'];
@@ -51,7 +51,8 @@ try {
     }
 
     // 🛡 Rate Limiting
-    function rateLimit($ip, $limit = 100, $seconds = 60) {
+    function rateLimit($ip, $limit = 100, $seconds = 60)
+    {
         $dir = __DIR__ . "/storage/ratelimit";
         if (!is_dir($dir)) mkdir($dir, 0777, true);
 

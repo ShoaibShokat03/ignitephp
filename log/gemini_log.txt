@@ -1,0 +1,1553 @@
+{
+    "model": "gemini-2.5-flash",
+    "api_url": "https:\/\/generativelanguage.googleapis.com\/v1beta\/models\/gemini-2.5-flash:generateContent?key=AIzaSyDEciWigJXzgDeCxgWNNXFJfeAdMXQgbq8",
+    "prompt_length": 15761,
+    "prompt_preview": "You are a database analysis expert. Analyze the following database schema and provide insights for generating intelligent AI prompts.\n\nDatabase Schema:\nDATABASE SCHEMA (Complete structure with all col...",
+    "http_code": 200,
+    "curl_error": null,
+    "curl_errno": null,
+    "response_status": "SUCCESS",
+    "response": {
+        "candidates": [
+            {
+                "content": {
+                    "parts": [
+                        {
+                            "text": "```json\n{\n  \"database_type\": \"Orthodontic Treatment Management System (Clear Aligners)\",\n  \"key_entities\": [\n    \"Users (Patients, Doctors, Admins)\",\n    \"Patient Profiles\",\n    \"Doctor Profiles\",\n    \"Treatment Plans (Generic & 3D Patient-Specific)\",\n    \"Treatment Steps\",\n    \"Dental Scans (Impressions & In-progress Treatment Scans)\",\n    \"Orders\",\n    \"Communication (Chat, Issues, Notifications)\",\n    \"Consent Forms\",\n    \"Referrals\",\n    \"Activity Log\"\n  ],\n  \"business_context\": \"This database underpins a platform designed to manage the entire lifecycle of clear aligner orthodontic treatments. It facilitates patient onboarding, consent management, detailed 3D treatment planning, step-by-step progress tracking, and remote monitoring through scans and notes. The system enables robust communication between patients and doctors, handles treatment-related orders, manages system notifications and reminders, and incorporates a referral program to incentivize patient acquisition. It also tracks user activities and provides general information through FAQs and video tutorials.\",\n  \"common_queries\": [\n    \"List all active patients and their assigned doctor's contact information.\",\n    \"Show the current treatment progress for Patient X, including their current step, start\/end dates, and any associated scans or notes.\",\n    \"Retrieve all reported issues for Doctor Y's patients that are still active or pending resolution.\",\n    \"Find all orders placed for aligners in the last month, grouped by patient, showing their status and tracking ID.\",\n    \"Get a list of all unread notifications for a specific user.\",\n    \"Who are the guardians for Patient Z?\",\n    \"Show all 3D treatment plans approved in the last quarter, along with the patient's and doctor's names.\",\n    \"Which patients have an 'inprogress' treatment step and haven't uploaded a scan in the last week?\"\n  ],\n  \"specialized_terminology\": {\n    \"Aligner\": \"A clear dental appliance used for orthodontic treatment (e.g., `aligner_type` in `patient_profiles`, `upper_aligners`, `lower_aligners` in `treatment_3d_plans`).\",\n    \"Arch Type\": \"Refers to the upper, lower, or both dental arches (`arch_type` in `treatment_3d_plans`, `treatment_scans`).\",\n    \"Impression Scan\": \"Initial dental scans taken to create a baseline model before treatment planning (`impression_scans`).\",\n    \"Treatment Scan\": \"Scans taken by the patient during treatment to monitor progress, potentially with or without aligners (`treatment_scans`).\",\n    \"Treatment Step\": \"An individual, distinct phase within a patient's overall orthodontic treatment plan, each with specific duration and status (`treatment_steps`).\",\n    \"3D Plan (Treatment 3D Plan)\": \"A detailed digital model and proposed sequence of aligners or treatment actions for a specific patient (`treatment_3d_plans`).\",\n    \"Reels\": \"Short video clips, likely used for progress tracking or showcasing before\/after results (`reels`).\",\n    \"Consent Form\": \"A legal document that patients must review and agree to before starting treatment (`consent_forms`, `patient_consent_form_agreed`).\",\n    \"is_patient_monitored\": \"A status indicating whether a patient's treatment is actively being tracked and reviewed by a doctor (`users.is_patient_monitored`).\"\n  },\n  \"relationships\": \"The `users` table is central, acting as the hub for all user types (admin, doctor, customer, patient). `doctor_profiles` and `patient_profiles` extend `users` with role-specific details. Patients (`users` with 'patient' role) are linked to `consent_forms`, `impression_scans`, `issues`, `orders`, `patient_consent_form_agreed`, `patient_guardians`, `reels`, `referrals`, `referral_transaction`, `reminders`, `treatment_3d_plans`, and `treatment_steps`. Doctors (`users` with 'doctor' role) manage `quick_reply` templates and are assigned to `patient_profiles`. A `treatment_3d_plan` belongs to a patient and consists of multiple `treatment_steps`. Each `treatment_step` can have associated `treatment_scans` and `aligner_notes`. Communication happens via `chat` between users, and `issues` are linked to specific `treatment_steps` and `patients`. All users generate `activity_log` entries and receive `app_notifications` and `notifications` through `device_tokens`.\",\n  \"user_roles\": [\n    \"Admin: System administrators responsible for overall platform management.\",\n    \"Doctor: Licensed dental professionals (e.g., orthodontists) who oversee and manage patient treatment plans.\",\n    \"Patient: Individuals undergoing clear aligner orthodontic treatment.\",\n    \"Customer: A broader user type, potentially pre-patient users, or those with general inquiries.\",\n    \"Guardian: (Implied via `patient_guardians`) Individuals legally responsible for a patient, often minors.\"\n  ],\n  \"workflow_patterns\": \"1. **Patient Onboarding**: User registration (`users`), `patient_profile` creation, `consent_form` completion (`patient_consent_form_agreed`).\\n2. **Initial Assessment & Doctor Assignment**: Upload of `impression_scans`, assignment of a `doctor_id` to the `patient_profile`.\\n3. **Treatment Planning**: Doctor creates\/reviews `treatment_3d_plans` for the patient, which are then approved by the patient.\\n4. **Treatment Execution & Monitoring**: `treatment_3d_plans` are broken into `treatment_steps`. Patients upload `treatment_scans` periodically. Doctors\/staff add `aligner_notes` for progress tracking.\\n5. **Communication & Support**: Patients can `chat` with doctors\/support, or log `issues` against specific `treatment_steps`.\\n6. **Order Management**: `orders` for aligners or related products are placed and tracked.\\n7. **Patient Engagement**: `reminders` are sent, `app_notifications` provide updates, and `reels` can be used to showcase progress.\\n8. **Referral Program**: Patients participate in `referrals` leading to `referral_transaction`.\"\n}\n```"
+                        }
+                    ],
+                    "role": "model"
+                },
+                "finishReason": "STOP",
+                "index": 0
+            }
+        ],
+        "usageMetadata": {
+            "promptTokenCount": 5069,
+            "candidatesTokenCount": 1395,
+            "totalTokenCount": 9055,
+            "promptTokensDetails": [
+                {
+                    "modality": "TEXT",
+                    "tokenCount": 5069
+                }
+            ],
+            "thoughtsTokenCount": 2591
+        },
+        "modelVersion": "gemini-2.5-flash",
+        "responseId": "UAfpaObwArennsEPoJ_VuAY"
+    },
+    "generated_at": 1760102224,
+    "generated_at_formatted": "2025-10-10 15:17:04"
+}
+
+{
+    "model": "gemini-2.5-flash",
+    "api_url": "https:\/\/generativelanguage.googleapis.com\/v1beta\/models\/gemini-2.5-flash:generateContent?key=AIzaSyDEciWigJXzgDeCxgWNNXFJfeAdMXQgbq8",
+    "prompt_length": 18519,
+    "prompt_preview": "You are a UI\/UX expert specializing in database-driven application design. Analyze the database schema below and generate an intelligent UI configuration. application name will be similar to the datab...",
+    "http_code": 200,
+    "curl_error": null,
+    "curl_errno": null,
+    "response_status": "SUCCESS",
+    "response": {
+        "candidates": [
+            {
+                "content": {
+                    "parts": [
+                        {
+                            "text": "```json\n{\n  \"application_type\": \"Orthodontic Patient & Treatment Management System\",\n  \"page_title\": \"AlignCare Connect Dashboard\",\n  \"header_title\": \"AlignCare Connect\",\n  \"header_subtitle\": \"Comprehensive Patient & Treatment Management\",\n  \"welcome_message\": \"Welcome to AlignCare Connect! 👋 I'm here to help you navigate patient data, track treatment progress, and manage administrative tasks effortlessly. What can I assist you with today?\",\n  \"placeholder_text\": \"Ask me about patients, treatments, orders, or activities...\",\n  \"branding\": {\n    \"primary_color\": \"#007bff\",\n    \"secondary_color\": \"#6c757d\",\n    \"accent_color\": \"#28a745\",\n    \"icon\": \"fas fa-tooth\",\n    \"personality\": \"Helpful, efficient, and patient-focused AI assistant.\"\n  },\n  \"quick_suggestions\": [\n    {\n      \"text\": \"Today's Reminders\",\n      \"question\": \"Show all reminders scheduled for today\",\n      \"icon\": \"fas fa-bell\"\n    },\n    {\n      \"text\": \"New Patients\",\n      \"question\": \"Show recently registered patients\",\n      \"icon\": \"fas fa-user-plus\"\n    },\n    {\n      \"text\": \"Pending Orders\",\n      \"question\": \"Show orders with 'pending' status\",\n      \"icon\": \"fas fa-truck\"\n    },\n    {\n      \"text\": \"Open Patient Issues\",\n      \"question\": \"Show all active patient issues\",\n      \"icon\": \"fas fa-exclamation-circle\"\n    },\n    {\n      \"text\": \"Pending Plan Approvals\",\n      \"question\": \"Show treatment 3D plans awaiting approval\",\n      \"icon\": \"fas fa-check-square\"\n    },\n    {\n      \"text\": \"Active Doctors\",\n      \"question\": \"Show currently active doctors\",\n      \"icon\": \"fas fa-user-md\"\n    },\n    {\n      \"text\": \"Monitored Patients\",\n      \"question\": \"Show patients currently under monitoring\",\n      \"icon\": \"fas fa-chart-line\"\n    },\n    {\n      \"text\": \"Total Patients\",\n      \"question\": \"Count all registered patients in the system\",\n      \"icon\": \"fas fa-users\"\n    },\n    {\n      \"text\": \"Recent Activity Log\",\n      \"question\": \"Show the most recent system activity entries\",\n      \"icon\": \"fas fa-history\"\n    },\n    {\n      \"text\": \"View Patient Scans\",\n      \"question\": \"Show impression scans for patients\",\n      \"icon\": \"fas fa-x-ray\"\n    }\n  ],\n  \"generated_at\": \"2023-10-27T12:00:00Z\"\n}\n```"
+                        }
+                    ],
+                    "role": "model"
+                },
+                "finishReason": "STOP",
+                "index": 0
+            }
+        ],
+        "usageMetadata": {
+            "promptTokenCount": 5796,
+            "candidatesTokenCount": 661,
+            "totalTokenCount": 9358,
+            "promptTokensDetails": [
+                {
+                    "modality": "TEXT",
+                    "tokenCount": 5796
+                }
+            ],
+            "thoughtsTokenCount": 2901
+        },
+        "modelVersion": "gemini-2.5-flash",
+        "responseId": "aAfpaLq4F4fMkdUP_-bSoQY"
+    },
+    "generated_at": 1760102249,
+    "generated_at_formatted": "2025-10-10 15:17:29"
+}
+
+{
+    "model": "gemini-2.5-flash",
+    "api_url": "https:\/\/generativelanguage.googleapis.com\/v1beta\/models\/gemini-2.5-flash:generateContent?key=AIzaSyDEciWigJXzgDeCxgWNNXFJfeAdMXQgbq8",
+    "prompt_length": 30081,
+    "prompt_preview": "You are an intelligent Management System Assistant with expertise in SQL query generation.\n\nYour Core Responsibilities:\n1. Analyze user questions in any language and determine if they require database...",
+    "http_code": 200,
+    "curl_error": null,
+    "curl_errno": null,
+    "response_status": "SUCCESS",
+    "response": {
+        "candidates": [
+            {
+                "content": {
+                    "parts": [
+                        {
+                            "text": "{\"type\": \"sql\", \"sql\": \"SELECT u.username AS doctor_username, u.email AS doctor_email, u.phone AS doctor_phone, dp.first_name AS doctor_first_name, dp.last_name AS doctor_last_name, dp.full_name AS doctor_full_name, dp.specialization, dp.qualification, dp.experience_years FROM users AS u LEFT JOIN doctor_profiles AS dp ON u.id = dp.user_id WHERE u.role = 'doctor' AND dp.active = 1 LIMIT 300\"}"
+                        }
+                    ],
+                    "role": "model"
+                },
+                "finishReason": "STOP",
+                "index": 0
+            }
+        ],
+        "usageMetadata": {
+            "promptTokenCount": 8495,
+            "candidatesTokenCount": 127,
+            "totalTokenCount": 9316,
+            "promptTokensDetails": [
+                {
+                    "modality": "TEXT",
+                    "tokenCount": 8495
+                }
+            ],
+            "thoughtsTokenCount": 694
+        },
+        "modelVersion": "gemini-2.5-flash",
+        "responseId": "nQfpaJuKO8mF7M8Po8vm6Qw"
+    },
+    "generated_at": 1760102302,
+    "generated_at_formatted": "2025-10-10 15:18:22"
+}
+
+{
+    "model": "gemini-2.5-flash",
+    "api_url": "https:\/\/generativelanguage.googleapis.com\/v1beta\/models\/gemini-2.5-flash:generateContent?key=AIzaSyDEciWigJXzgDeCxgWNNXFJfeAdMXQgbq8",
+    "prompt_length": 3960,
+    "prompt_preview": "You are an intelligent Management System Assistant creating a summary of database query results.\nTask: Analyze the following Management System records and create a clear, concise summary that helps us...",
+    "http_code": 200,
+    "curl_error": null,
+    "curl_errno": null,
+    "response_status": "SUCCESS",
+    "response": {
+        "candidates": [
+            {
+                "content": {
+                    "parts": [
+                        {
+                            "text": "Found 11 record(s) detailing various doctors. These professionals primarily specialize in General Dentistry and Oral Surgery, with qualifications predominantly from Smileie UK. A notable pattern across all records is that each doctor has 1 year of experience."
+                        }
+                    ],
+                    "role": "model"
+                },
+                "finishReason": "STOP",
+                "index": 0
+            }
+        ],
+        "usageMetadata": {
+            "promptTokenCount": 1058,
+            "candidatesTokenCount": 48,
+            "totalTokenCount": 1593,
+            "promptTokensDetails": [
+                {
+                    "modality": "TEXT",
+                    "tokenCount": 1058
+                }
+            ],
+            "thoughtsTokenCount": 487
+        },
+        "modelVersion": "gemini-2.5-flash",
+        "responseId": "owfpaPTZF4brkdUPl6vIgQw"
+    },
+    "generated_at": 1760102308,
+    "generated_at_formatted": "2025-10-10 15:18:28"
+}
+
+{
+    "model": "gemini-2.5-flash",
+    "api_url": "https:\/\/generativelanguage.googleapis.com\/v1beta\/models\/gemini-2.5-flash:generateContent?key=AIzaSyDEciWigJXzgDeCxgWNNXFJfeAdMXQgbq8",
+    "prompt_length": 21470,
+    "prompt_preview": "You are a database analysis expert. Analyze the following database schema and provide insights for generating intelligent AI prompts.\n\nDatabase Schema:\nDATABASE SCHEMA (Complete structure with all col...",
+    "http_code": 200,
+    "curl_error": null,
+    "curl_errno": null,
+    "response_status": "SUCCESS",
+    "response": {
+        "candidates": [
+            {
+                "content": {
+                    "parts": [
+                        {
+                            "text": "```json\n{\n  \"database_type\": \"School Management System (SMS) \/ Educational ERP\",\n  \"key_entities\": [\n    \"School\",\n    \"User (Student, Teacher, Parent, Admin)\",\n    \"Academic Session\",\n    \"Class\",\n    \"Section\",\n    \"Subject\",\n    \"Exam (Category, Term, Result)\",\n    \"Attendance\",\n    \"Library Book\",\n    \"Fee \/ Payment\",\n    \"Subscription Package\",\n    \"Timetable \/ Routine\",\n    \"Notice \/ Event\",\n    \"Department\",\n    \"Addon\"\n  ],\n  \"business_context\": \"This is a comprehensive multi-tenant School Management System (SMS) designed to manage various aspects of educational institutions. It facilitates the administration of multiple schools, each with its users (students, teachers, parents, and school administrators), classes, sections, and subjects. The system handles core academic functions like enrollments, daily attendances, exams, gradebooks, student results, and routines. It also includes features for library management (books, book issues), financial management (student fees, expenses, payments), communication (chats, feedback, noticeboard, notifications), and content management (syllabuses). The presence of packages and subscriptions indicates it's offered as a SaaS solution, allowing schools to subscribe to different tiers of service.\",\n  \"common_queries\": [\n    \"List all students in Class 5, Section A, for the current academic session.\",\n    \"Show the daily attendance record for a specific student for the past month.\",\n    \"Retrieve the exam results for all students in the 'Annual Exam 2023' for Math subject.\",\n    \"Which books are currently issued to John Doe (a student) from the library?\",\n    \"Summarize the total fees collected and outstanding fees for Class 10 this month.\",\n    \"Display the timetable (routine) for Class 7, Section B, for the upcoming week.\",\n    \"Show all notices posted by the school for the current session.\",\n    \"Find all teachers assigned to teach subjects in Class 8.\"\n  ],\n  \"specialized_terminology\": {\n    \"session_id\": \"Refers to the academic year or term (e.g., 2023-2024). Stored in `sessions` table.\",\n    \"class_id\": \"Represents a grade level or academic group (e.g., Grade 1, Class 10). Stored in `classes` table.\",\n    \"section_id\": \"A subdivision of a class (e.g., Class 5A, Class 5B). Stored in `sections` table.\",\n    \"exam_category_id\": \"Defines categories of exams (e.g., Mid-Term, Final Exam, Quiz). Stored in `exam_categories` table.\",\n    \"exam_term_id\": \"Represents a specific period for exams with start and end dates. Stored in `exam_terms` table.\",\n    \"gradebooks\": \"Records individual student marks\/grades for specific exams\/subjects.\",\n    \"enrollments\": \"The act of a student being registered in a class and section for a session.\",\n    \"routines\": \"Class schedules or timetables.\",\n    \"syllabuses\": \"Course outlines or curriculum documents.\",\n    \"admit_cards\": \"Official documents allowing a student to enter an examination.\",\n    \"book_issues\": \"Records of books checked out from the library by students.\",\n    \"student_fee_managers\": \"Manages the fee structure, amounts, and payment status for students.\",\n    \"timestamp (int(11))\": \"In certain tables (e.g., book_issues, daily_attendances), this column stores a date, likely as a Unix timestamp or integer YYYYMMDD format, distinct from the `timestamp` data type used for `created_at`\/`updated_at`.\"\n  },\n  \"relationships\": \"A `School` (schools) is the central entity, managing multiple `Users` (students, teachers, parents, admins), `Classes`, `Sessions`, `Subjects`, `Departments`, `Exams`, `Books`, `Expenses`, `Notices`, `Fees`, and `Subscriptions`. `Users` have specific `Roles` (roles) and belong to a `School`. Students are `enrolled` in `Classes` and `Sections` for a given `Session`. Teachers are assigned to `Departments` and have `Routines`. Parents are linked to students. `Classes` have `Sections` and contain `Subjects`. `Enrollments` establish the link between `Students` (users), `Classes`, `Sections`, `Schools`, `Departments`, and `Sessions`. `Daily Attendances` record the presence of `Students` in `Classes` and `Sections` for a `Session`. `Exams` are categorized by `Exam Categories` and are conducted for `Subjects` in specific `Classes` and `Sessions`. `Exam Terms` define periods for exams. Academic Performance is recorded in `Gradebooks` and `Student Results` for `Students` across `Classes`, `Sections`, `Exam Categories`, and `Exam Terms`. `Books` are part of a school's library and are managed through `Book Issues` for `Students`. Financial Transactions involve `Student Fees` (`student_fee_managers`), `Payments` (`payments`, `payment_history`), and `Expenses` (`expenses`, `expense_categories`) within a `School` and `Session`. `Schools` subscribe to the platform through `Subscriptions` to specific `Packages`. `Clusters` can group multiple `Schools`.\",\n  \"user_roles\": [\n    \"Admin\/Super Admin (Platform level)\",\n    \"School Admin (Manages a specific school)\",\n    \"Teacher\",\n    \"Student\",\n    \"Parent\"\n  ],\n  \"workflow_patterns\": \"1. **School Onboarding & Subscription**: A new school registers, chooses a `package`, and processes a `subscription` payment. A School `Admin` user is created.\\n2. **Academic Year Setup**: A new `session` is created. `Classes`, `Sections`, `Subjects`, `Exam Categories`, and `Exam Terms` are defined for the session.\\n3. **Student Management**: New `users` (students) are registered, assigned `parent_id` if applicable, and `enrolled` into specific `classes`, `sections`, and `departments` for the active `session`. Student `fees` are configured in `student_fee_managers`.\\n4. **Teacher Management**: New `users` (teachers) are registered, assigned to `departments`, and `routines` are set for their `classes` and `subjects`. `Teacher permissions` are configured.\\n5. **Daily Operations**: `Daily Attendances` are marked by teachers. `Library Books` are issued and returned. `Exams` are scheduled, `admit cards` generated, `marks` are recorded, and `results` compiled. `Syllabuses` and other study materials are uploaded. `Notices` and `Frontend Events` are posted. `Student fees` are managed and `payments` processed. Staff `leave requests` are submitted.\\n6. **Reporting & Communication**: Generate reports on student performance, attendance, fees. Users can `chat`, provide `feedback`. `Notifications` are sent.\"\n}\n```"
+                        }
+                    ],
+                    "role": "model"
+                },
+                "finishReason": "STOP",
+                "index": 0
+            }
+        ],
+        "usageMetadata": {
+            "promptTokenCount": 7337,
+            "candidatesTokenCount": 1581,
+            "totalTokenCount": 12354,
+            "cachedContentTokenCount": 7145,
+            "promptTokensDetails": [
+                {
+                    "modality": "TEXT",
+                    "tokenCount": 7337
+                }
+            ],
+            "cacheTokensDetails": [
+                {
+                    "modality": "TEXT",
+                    "tokenCount": 7145
+                }
+            ],
+            "thoughtsTokenCount": 3436
+        },
+        "modelVersion": "gemini-2.5-flash",
+        "responseId": "GQjpaPmdF5rqkdUPpfriwQY"
+    },
+    "generated_at": 1760102426,
+    "generated_at_formatted": "2025-10-10 15:20:26"
+}
+
+{
+    "model": "gemini-2.5-flash",
+    "api_url": "https:\/\/generativelanguage.googleapis.com\/v1beta\/models\/gemini-2.5-flash:generateContent?key=AIzaSyDEciWigJXzgDeCxgWNNXFJfeAdMXQgbq8",
+    "prompt_length": 24228,
+    "prompt_preview": "You are a UI\/UX expert specializing in database-driven application design. Analyze the database schema below and generate an intelligent UI configuration. application name will be similar to the datab...",
+    "http_code": 200,
+    "curl_error": null,
+    "curl_errno": null,
+    "response_status": "SUCCESS",
+    "response": {
+        "candidates": [
+            {
+                "content": {
+                    "parts": [
+                        {
+                            "text": "```json\n{\n  \"application_type\": \"School Management System\",\n  \"page_title\": \"SchoolPilot AI Assistant\",\n  \"header_title\": \"SchoolPilot AI\",\n  \"header_subtitle\": \"Your smart assistant for school management\",\n  \"welcome_message\": \"Hello there! 👋 I'm your SchoolPilot AI assistant. I can help you quickly access information, manage tasks, and get insights from your school's data. Just ask me anything!\",\n  \"placeholder_text\": \"Ask me about students, classes, finances, or anything else...\",\n  \"branding\": {\n    \"primary_color\": \"#3366FF\",\n    \"secondary_color\": \"#66CCFF\",\n    \"accent_color\": \"#FFA500\",\n    \"icon\": \"fas fa-school\",\n    \"personality\": \"An efficient, knowledgeable, and friendly AI assistant, dedicated to streamlining school administration and enhancing educational operations.\"\n  },\n  \"quick_suggestions\": [\n    {\n      \"text\": \"Today's Attendance\",\n      \"question\": \"Show student attendance records for today\",\n      \"icon\": \"fas fa-user-check\"\n    },\n    {\n      \"text\": \"Active Classes\",\n      \"question\": \"Show current day's class routines\",\n      \"icon\": \"fas fa-chalkboard\"\n    },\n    {\n      \"text\": \"Pending Fee Payments\",\n      \"question\": \"List students with pending fee payments\",\n      \"icon\": \"fas fa-money-check-alt\"\n    },\n    {\n      \"text\": \"New Registrations\",\n      \"question\": \"Show users registered in the last week\",\n      \"icon\": \"fas fa-user-plus\"\n    },\n    {\n      \"text\": \"Current Notices\",\n      \"question\": \"Show all active notices on the noticeboard\",\n      \"icon\": \"fas fa-bullhorn\"\n    },\n    {\n      \"text\": \"Unreturned Books\",\n      \"question\": \"Show all currently unreturned book issues\",\n      \"icon\": \"fas fa-book-reader\"\n    },\n    {\n      \"text\": \"Next 7 Days Exams\",\n      \"question\": \"Show exams scheduled for the next seven days\",\n      \"icon\": \"fas fa-pen-alt\"\n    },\n    {\n      \"text\": \"Pending Leave Requests\",\n      \"question\": \"Show leave requests awaiting approval\",\n      \"icon\": \"fas fa-calendar-minus\"\n    },\n    {\n      \"text\": \"Recent Expenses\",\n      \"question\": \"Show all expenses recorded in the last 30 days\",\n      \"icon\": \"fas fa-receipt\"\n    },\n    {\n      \"text\": \"Total Students\",\n      \"question\": \"What is the total number of students enrolled?\",\n      \"icon\": \"fas fa-users-class\"\n    }\n  ],\n  \"generated_at\": \"2023-10-27T10:30:00Z\"\n}\n```"
+                        }
+                    ],
+                    "role": "model"
+                },
+                "finishReason": "STOP",
+                "index": 0
+            }
+        ],
+        "usageMetadata": {
+            "promptTokenCount": 8064,
+            "candidatesTokenCount": 684,
+            "totalTokenCount": 11321,
+            "promptTokensDetails": [
+                {
+                    "modality": "TEXT",
+                    "tokenCount": 8064
+                }
+            ],
+            "thoughtsTokenCount": 2573
+        },
+        "modelVersion": "gemini-2.5-flash",
+        "responseId": "MAjpaKegKtmrkdUPqKTzmQY"
+    },
+    "generated_at": 1760102449,
+    "generated_at_formatted": "2025-10-10 15:20:49"
+}
+
+{
+    "model": "gemini-2.5-flash",
+    "api_url": "https:\/\/generativelanguage.googleapis.com\/v1beta\/models\/gemini-2.5-flash:generateContent?key=AIzaSyDEciWigJXzgDeCxgWNNXFJfeAdMXQgbq8",
+    "prompt_length": 36501,
+    "prompt_preview": "You are an intelligent Management System Assistant with expertise in SQL query generation.\n\nYour Core Responsibilities:\n1. Analyze user questions in any language and determine if they require database...",
+    "http_code": 200,
+    "curl_error": null,
+    "curl_errno": null,
+    "response_status": "SUCCESS",
+    "response": {
+        "candidates": [
+            {
+                "content": {
+                    "parts": [
+                        {
+                            "text": "{\"type\": \"text\", \"text\": \"Hello! How can I assist you with the Management System today?\"}"
+                        }
+                    ],
+                    "role": "model"
+                },
+                "finishReason": "STOP",
+                "index": 0
+            }
+        ],
+        "usageMetadata": {
+            "promptTokenCount": 10941,
+            "candidatesTokenCount": 24,
+            "totalTokenCount": 11052,
+            "promptTokensDetails": [
+                {
+                    "modality": "TEXT",
+                    "tokenCount": 10941
+                }
+            ],
+            "thoughtsTokenCount": 87
+        },
+        "modelVersion": "gemini-2.5-flash",
+        "responseId": "PQjpaPzvEPaIkdUPjLTA8Qs"
+    },
+    "generated_at": 1760102461,
+    "generated_at_formatted": "2025-10-10 15:21:01"
+}
+
+{
+    "model": "gemini-2.5-flash",
+    "api_url": "https:\/\/generativelanguage.googleapis.com\/v1beta\/models\/gemini-2.5-flash:generateContent?key=AIzaSyDEciWigJXzgDeCxgWNNXFJfeAdMXQgbq8",
+    "prompt_length": 36248,
+    "prompt_preview": "You are an intelligent Management System Assistant with expertise in SQL query generation.\n\nYour Core Responsibilities:\n1. Analyze user questions in any language and determine if they require database...",
+    "http_code": 200,
+    "curl_error": null,
+    "curl_errno": null,
+    "response_status": "SUCCESS",
+    "response": {
+        "candidates": [
+            {
+                "content": {
+                    "parts": [
+                        {
+                            "text": "{\"type\": \"text\", \"text\": \"Hello! As a Management System Assistant, I don't have feelings, but I'm ready and fully operational to help you with any queries you have about the system today. How can I assist you?\"}"
+                        }
+                    ],
+                    "role": "model"
+                },
+                "finishReason": "STOP",
+                "index": 0
+            }
+        ],
+        "usageMetadata": {
+            "promptTokenCount": 10899,
+            "candidatesTokenCount": 53,
+            "totalTokenCount": 10997,
+            "cachedContentTokenCount": 9196,
+            "promptTokensDetails": [
+                {
+                    "modality": "TEXT",
+                    "tokenCount": 10899
+                }
+            ],
+            "cacheTokensDetails": [
+                {
+                    "modality": "TEXT",
+                    "tokenCount": 9196
+                }
+            ],
+            "thoughtsTokenCount": 45
+        },
+        "modelVersion": "gemini-2.5-flash",
+        "responseId": "RAjpaNCOHLaznsEP4bjDsQo"
+    },
+    "generated_at": 1760102469,
+    "generated_at_formatted": "2025-10-10 15:21:09"
+}
+
+{
+    "model": "gemini-2.5-flash",
+    "api_url": "https:\/\/generativelanguage.googleapis.com\/v1beta\/models\/gemini-2.5-flash:generateContent?key=AIzaSyDEciWigJXzgDeCxgWNNXFJfeAdMXQgbq8",
+    "prompt_length": 36463,
+    "prompt_preview": "You are an intelligent Management System Assistant with expertise in SQL query generation.\n\nYour Core Responsibilities:\n1. Analyze user questions in any language and determine if they require database...",
+    "http_code": 200,
+    "curl_error": null,
+    "curl_errno": null,
+    "response_status": "SUCCESS",
+    "response": {
+        "candidates": [
+            {
+                "content": {
+                    "parts": [
+                        {
+                            "text": "{\"type\": \"sql\", \"sql\": \"SELECT u.id, u.name AS student_name, u.email FROM users AS u LEFT JOIN roles AS r ON u.role_id = r.role_id WHERE u.name LIKE '%Hadi%' AND r.name = 'student' LIMIT 300\"}"
+                        }
+                    ],
+                    "role": "model"
+                },
+                "finishReason": "STOP",
+                "index": 0
+            }
+        ],
+        "usageMetadata": {
+            "promptTokenCount": 10951,
+            "candidatesTokenCount": 70,
+            "totalTokenCount": 11960,
+            "cachedContentTokenCount": 9196,
+            "promptTokensDetails": [
+                {
+                    "modality": "TEXT",
+                    "tokenCount": 10951
+                }
+            ],
+            "cacheTokensDetails": [
+                {
+                    "modality": "TEXT",
+                    "tokenCount": 9196
+                }
+            ],
+            "thoughtsTokenCount": 939
+        },
+        "modelVersion": "gemini-2.5-flash",
+        "responseId": "WwjpaNnMDLennsEPoJ_VuAY"
+    },
+    "generated_at": 1760102491,
+    "generated_at_formatted": "2025-10-10 15:21:31"
+}
+
+{
+    "model": "gemini-2.5-flash",
+    "api_url": "https:\/\/generativelanguage.googleapis.com\/v1beta\/models\/gemini-2.5-flash:generateContent?key=AIzaSyDEciWigJXzgDeCxgWNNXFJfeAdMXQgbq8",
+    "prompt_length": 46756,
+    "prompt_preview": "You are a database analysis expert. Analyze the following database schema and provide insights for generating intelligent AI prompts.\n\nDatabase Schema:\nDATABASE SCHEMA (Complete structure with all col...",
+    "http_code": 200,
+    "curl_error": null,
+    "curl_errno": null,
+    "response_status": "SUCCESS",
+    "response": {
+        "candidates": [
+            {
+                "content": {
+                    "parts": [
+                        {
+                            "text": "```json\n{\n  \"database_type\": \"B2B Supply Chain & Inventory Management \/ CRM \/ ERP System\",\n  \"key_entities\": [\n    \"Companies (Customers\/Suppliers)\",\n    \"Company Contacts\",\n    \"Parts\/Items (PN, CPN)\",\n    \"Stock\/Inventory\",\n    \"Customer Requirements\",\n    \"Quotes\",\n    \"Offers\",\n    \"Sales Orders\",\n    \"Purchase Orders\",\n    \"Receiving (Goods In)\",\n    \"Invoices\",\n    \"Customer Returns\",\n    \"Supplier Returns\",\n    \"Users\",\n    \"Tasks\",\n    \"Communication Logs\"\n  ],\n  \"business_context\": \"This database system is designed for a business (likely a distributor or manufacturer) that deals with the procurement, sales, and management of electronic components or similar industrial parts. It covers the entire order lifecycle from initial customer requirements and inventory inquiries to quoting, sales order processing, purchasing, receiving, stock management, invoicing, and handling returns. It also includes robust CRM capabilities for managing company relationships, contacts, and internal communications, alongside extensive logging and quality assurance functionalities. Bulk upload features for customer inventory and requirements indicate support for high-volume data handling.\",\n  \"common_queries\": [\n    \"Show all active customers and their primary contact persons.\",\n    \"List all sales orders created in the last month, including the total value and customer company name.\",\n    \"Find available stock for part number 'XYZ' from 'Manufacturer ABC', showing quantity, date code, and resale price.\",\n    \"Display all purchase orders for 'Supplier_X' that are still pending receipt of goods, along with the items ordered.\",\n    \"What are the open requirements from 'Customer Y' that have not yet been quoted?\",\n    \"Generate a report of all invoices issued to 'Company Z' showing total amounts and payment status.\",\n    \"Show all communications logged for 'John Doe' at 'Company A'.\",\n    \"List all stock items that have undergone QA checks and their associated answers\/comments.\"\n  ],\n  \"specialized_terminology\": {\n    \"CPN\": \"Customer Part Number - the part number used by the customer.\",\n    \"PN_NO \/ PN\": \"Part Number - a manufacturer's or internal identifier for a specific part.\",\n    \"DCY\/DCW\": \"Date Code Year\/Week - indicates the manufacturing date of electronic components.\",\n    \"ROHS\": \"Restriction of Hazardous Substances - compliance status for environmental regulations.\",\n    \"Packaging\": \"Describes the physical packaging of components (e.g., Reel, Tray, Tube).\",\n    \"Prod\": \"Product - a general product category or type.\",\n    \"Manufacturer\": \"The company that produces the part.\",\n    \"COO\": \"Country of Origin - where the part was manufactured.\",\n    \"T\/P\": \"Traceability \/ Product Type - often indicates if the part is new, refurbished, etc., and its traceability information.\",\n    \"Inco Terms\": \"Incoterms (International Commercial Terms) - standardized terms defining shipping responsibilities between buyer and seller.\",\n    \"ECCN_LUS \/ ECCN_US\": \"Export Control Classification Number - for controlling the export of 'dual-use' goods, specific to EU and US regulations.\",\n    \"Dual Use\": \"Goods that can be used for both civilian and military purposes, subject to export controls.\",\n    \"Stock Deal\": \"A special agreement or classification for a particular stock purchase.\",\n    \"QC Level\": \"Quality Control Level - the standard or intensity of quality inspection.\",\n    \"Access Inventory\": \"Customer-provided inventory lists, giving visibility into a customer's own stock.\",\n    \"Requirements Bulk\": \"Bulk upload of customer requirements\/requests for parts.\",\n    \"GP%\": \"Gross Profit Percentage - used for calculating profit sharing or commissions for sales users.\"\n  },\n  \"relationships\": \"The system is highly relational, centered around `company` and `company_contact` which are linked to almost all transactional entities like `requirements`, `quotes`, `offers`, `sale_order`, `purchase_order`, `invoice_order`, `customer_return`, `supplier_return`. Master data tables (prefixed `mas_`) standardize attributes like `manufacturer`, `packaging`, `rohs`, `country`, `currency`, `date_code`, `payment_term`, `ship_via`, `tax`, `inco_term`, and are referenced via foreign keys across various item-level tables (e.g., `offer_item`, `sale_order_item`, `purchase_order_item`, `stock_item`). The `stock_item` table is central to inventory, linking `receiving_item` (inbound) and `stock_item_allocation` (outbound to `sale_order_item`). Log tables (`logs_*`) track changes across major modules.\",\n  \"user_roles\": [\n    \"Administrators (manages users, settings, permissions)\",\n    \"Sales Representatives \/ Account Managers (creates\/manages requirements, quotes, offers, sales orders, communications, customer data)\",\n    \"Purchasing Agents (creates\/manages purchase orders, supplier data)\",\n    \"Inventory \/ Warehouse Managers (manages stock, receiving, stock allocations, QA)\",\n    \"Finance \/ Accounts Personnel (handles invoicing, payments, returns, reconciliation)\",\n    \"Quality Control (QC) Staff (manages QA questions and answers for stock items)\",\n    \"General Users (access to tasks, basic information, potentially specific module access based on permissions)\"\n  ],\n  \"workflow_patterns\": \"1.  **Sales Cycle**: Customer (via `company_contact`) submits `requirements` (potentially bulk). Sales creates `quote` or `offer`. Upon acceptance, a `sale_order` is generated. Items are sourced (either from `stock_item` or through a `purchase_order`). `stock_item_allocation` tracks items reserved for sales. Finally, `invoice_order` is created and `invoice_payment` recorded.\\n2.  **Procurement Cycle**: `purchase_order` is issued to a `company` (supplier) for parts. When goods arrive, a `receiving` record is created, and `receiving_item` updates `stock_item` quantities.\\n3.  **Inventory Management**: `stock_item` tracks current physical inventory, including quantities, locations, costs, and resale prices. `qa_stock` records quality checks on inventory. Customer `access_inventory` can be uploaded to track customer's own stock.\\n4.  **Returns Management**: `customer_return` for items returned by customers, `supplier_return` for items returned to suppliers. These processes affect inventory and potentially invoicing.\\n5.  **CRM & Communication**: `company` and `company_contact` details are maintained. `communication` records interactions. `task` management supports internal coordination and follow-ups. `logs_*` tables provide an audit trail for all key actions.\"\n}\n```"
+                        }
+                    ],
+                    "role": "model"
+                },
+                "finishReason": "STOP",
+                "index": 0
+            }
+        ],
+        "usageMetadata": {
+            "promptTokenCount": 17157,
+            "candidatesTokenCount": 1491,
+            "totalTokenCount": 21446,
+            "promptTokensDetails": [
+                {
+                    "modality": "TEXT",
+                    "tokenCount": 17157
+                }
+            ],
+            "thoughtsTokenCount": 2798
+        },
+        "modelVersion": "gemini-2.5-flash",
+        "responseId": "mqDwaMHMCenYvdIP9bfW4AI"
+    },
+    "generated_at": 1760600218,
+    "generated_at_formatted": "2025-10-16 09:36:58"
+}
+
+{
+    "model": "gemini-2.5-flash",
+    "api_url": "https:\/\/generativelanguage.googleapis.com\/v1beta\/models\/gemini-2.5-flash:generateContent?key=AIzaSyDEciWigJXzgDeCxgWNNXFJfeAdMXQgbq8",
+    "prompt_length": 49514,
+    "prompt_preview": "You are a UI\/UX expert specializing in database-driven application design. Analyze the database schema below and generate an intelligent UI configuration. application name will be similar to the datab...",
+    "http_code": 200,
+    "curl_error": null,
+    "curl_errno": null,
+    "response_status": "SUCCESS",
+    "response": {
+        "candidates": [
+            {
+                "content": {
+                    "parts": [
+                        {
+                            "text": "```json\n{\n  \"application_type\": \"Inventory, Sales & Relationship Management System\",\n  \"page_title\": \"AccessFlow Solutions Dashboard\",\n  \"header_title\": \"AccessFlow Solutions\",\n  \"header_subtitle\": \"Streamline your inventory, sales, and customer relationships with intelligent insights.\",\n  \"welcome_message\": \"Hello there! 👋 I'm your AI assistant for AccessFlow Solutions. I can help you quickly find information, manage tasks, and get real-time updates across your business operations. Just ask!\",\n  \"placeholder_text\": \"e.g., 'Show today's tasks' or 'Find company contacts'\",\n  \"branding\": {\n    \"primary_color\": \"#2C3E50\",\n    \"secondary_color\": \"#3498DB\",\n    \"accent_color\": \"#E74C3C\",\n    \"icon\": \"fas fa-cubes\",\n    \"personality\": \"Efficient and Data-Driven\"\n  },\n  \"quick_suggestions\": [\n    {\n      \"text\": \"Today's Tasks\",\n      \"question\": \"Show tasks with due_date as today\",\n      \"icon\": \"fas fa-clipboard-list\"\n    },\n    {\n      \"text\": \"Recent Sales Orders\",\n      \"question\": \"List sales orders created in the last 24 hours\",\n      \"icon\": \"fas fa-money-check-alt\"\n    },\n    {\n      \"text\": \"New Customer Requirements\",\n      \"question\": \"Show customer requirements added today\",\n      \"icon\": \"fas fa-question-circle\"\n    },\n    {\n      \"text\": \"Active Offers\",\n      \"question\": \"Show all active offers not yet converted to sales orders\",\n      \"icon\": \"fas fa-handshake\"\n    },\n    {\n      \"text\": \"Current Stock Items\",\n      \"question\": \"List all stock_item with available quantity greater than zero\",\n      \"icon\": \"fas fa-boxes\"\n    },\n    {\n      \"text\": \"Outstanding Purchase Orders\",\n      \"question\": \"Show purchase_order with items not fully received\",\n      \"icon\": \"fas fa-truck-loading\"\n    },\n    {\n      \"text\": \"Recently Added Companies\",\n      \"question\": \"List companies created in the last 7 days\",\n      \"icon\": \"fas fa-building\"\n    },\n    {\n      \"text\": \"Unprocessed Inventory Uploads\",\n      \"question\": \"Show access_inventory_master where is_processed is 'no'\",\n      \"icon\": \"fas fa-file-upload\"\n    },\n    {\n      \"text\": \"Pending Invoices\",\n      \"question\": \"List invoice_order that are not yet fully paid\",\n      \"icon\": \"fas fa-file-invoice-dollar\"\n    },\n    {\n      \"text\": \"Hot Part Inquiries\",\n      \"question\": \"Show all active hot_part requests\",\n      \"icon\": \"fas fa-fire\"\n    }\n  ],\n  \"generated_at\": \"2024-07-30T10:30:00Z\"\n}\n```"
+                        }
+                    ],
+                    "role": "model"
+                },
+                "finishReason": "STOP",
+                "index": 0
+            }
+        ],
+        "usageMetadata": {
+            "promptTokenCount": 17884,
+            "candidatesTokenCount": 714,
+            "totalTokenCount": 21164,
+            "promptTokensDetails": [
+                {
+                    "modality": "TEXT",
+                    "tokenCount": 17884
+                }
+            ],
+            "thoughtsTokenCount": 2566
+        },
+        "modelVersion": "gemini-2.5-flash",
+        "responseId": "s6DwaLGNEoj7xs0PgvqrkAM"
+    },
+    "generated_at": 1760600243,
+    "generated_at_formatted": "2025-10-16 09:37:23"
+}
+
+{
+    "model": "gemini-2.5-flash",
+    "api_url": "https:\/\/generativelanguage.googleapis.com\/v1beta\/models\/gemini-2.5-flash:generateContent?key=AIzaSyDEciWigJXzgDeCxgWNNXFJfeAdMXQgbq8",
+    "prompt_length": 64149,
+    "prompt_preview": "You are an intelligent Management System Assistant with expertise in SQL query generation.\n\nYour Core Responsibilities:\n1. Analyze user questions in any language and determine if they require database...",
+    "http_code": 200,
+    "curl_error": null,
+    "curl_errno": null,
+    "response_status": "SUCCESS",
+    "response": {
+        "candidates": [
+            {
+                "content": {
+                    "parts": [
+                        {
+                            "text": "{\"type\": \"sql\", \"sql\": \"SELECT company_name AS company_name FROM company ORDER BY id DESC LIMIT 5\"}"
+                        }
+                    ],
+                    "role": "model"
+                },
+                "finishReason": "STOP",
+                "index": 0
+            }
+        ],
+        "usageMetadata": {
+            "promptTokenCount": 21469,
+            "candidatesTokenCount": 28,
+            "totalTokenCount": 21862,
+            "promptTokensDetails": [
+                {
+                    "modality": "TEXT",
+                    "tokenCount": 21469
+                }
+            ],
+            "thoughtsTokenCount": 365
+        },
+        "modelVersion": "gemini-2.5-flash",
+        "responseId": "A6HwaOmUI-O0vdIPwfirWQ"
+    },
+    "generated_at": 1760600324,
+    "generated_at_formatted": "2025-10-16 09:38:44"
+}
+
+{
+    "model": "gemini-2.5-flash",
+    "api_url": "https:\/\/generativelanguage.googleapis.com\/v1beta\/models\/gemini-2.5-flash:generateContent?key=AIzaSyDEciWigJXzgDeCxgWNNXFJfeAdMXQgbq8",
+    "prompt_length": 1365,
+    "prompt_preview": "You are an intelligent Management System Assistant creating a summary of database query results.\nTask: Analyze the following Management System records and create a clear, concise summary that helps us...",
+    "http_code": 200,
+    "curl_error": null,
+    "curl_errno": null,
+    "response_status": "SUCCESS",
+    "response": {
+        "candidates": [
+            {
+                "content": {
+                    "parts": [
+                        {
+                            "text": "Found 5 record(s) of company names. These records highlight a diverse group of organizations, including '2ndowner', 'Labelident GmbH', 'Key Tronic Corporation', 'Hotel Mecklenburger Hof', and 'Seehotel Weissensee'. This collection provides a clear overview of the various companies currently being managed."
+                        }
+                    ],
+                    "role": "model"
+                },
+                "finishReason": "STOP",
+                "index": 0
+            }
+        ],
+        "usageMetadata": {
+            "promptTokenCount": 306,
+            "candidatesTokenCount": 65,
+            "totalTokenCount": 790,
+            "promptTokensDetails": [
+                {
+                    "modality": "TEXT",
+                    "tokenCount": 306
+                }
+            ],
+            "thoughtsTokenCount": 419
+        },
+        "modelVersion": "gemini-2.5-flash",
+        "responseId": "CaHwaOqjAZigxN8Pz8WI2QM"
+    },
+    "generated_at": 1760600329,
+    "generated_at_formatted": "2025-10-16 09:38:49"
+}
+
+{
+    "model": "gemini-2.5-flash",
+    "api_url": "https:\/\/generativelanguage.googleapis.com\/v1beta\/models\/gemini-2.5-flash:generateContent?key=AIzaSyDEciWigJXzgDeCxgWNNXFJfeAdMXQgbq8",
+    "prompt_length": 64465,
+    "prompt_preview": "You are an intelligent Management System Assistant with expertise in SQL query generation.\n\nYour Core Responsibilities:\n1. Analyze user questions in any language and determine if they require database...",
+    "http_code": 200,
+    "curl_error": null,
+    "curl_errno": null,
+    "response_status": "SUCCESS",
+    "response": {
+        "candidates": [
+            {
+                "content": {
+                    "parts": [
+                        {
+                            "text": "{\"type\": \"sql\", \"sql\": \"SELECT COUNT(id) AS total_sales FROM sale_order\"}"
+                        }
+                    ],
+                    "role": "model"
+                },
+                "finishReason": "STOP",
+                "index": 0
+            }
+        ],
+        "usageMetadata": {
+            "promptTokenCount": 21537,
+            "candidatesTokenCount": 24,
+            "totalTokenCount": 22085,
+            "cachedContentTokenCount": 20458,
+            "promptTokensDetails": [
+                {
+                    "modality": "TEXT",
+                    "tokenCount": 21537
+                }
+            ],
+            "cacheTokensDetails": [
+                {
+                    "modality": "TEXT",
+                    "tokenCount": 20458
+                }
+            ],
+            "thoughtsTokenCount": 524
+        },
+        "modelVersion": "gemini-2.5-flash",
+        "responseId": "Z6HwaNOrD9n6xs0PtaPbyQc"
+    },
+    "generated_at": 1760600423,
+    "generated_at_formatted": "2025-10-16 09:40:23"
+}
+
+{
+    "model": "gemini-2.5-flash",
+    "api_url": "https:\/\/generativelanguage.googleapis.com\/v1beta\/models\/gemini-2.5-flash:generateContent?key=AIzaSyDEciWigJXzgDeCxgWNNXFJfeAdMXQgbq8",
+    "prompt_length": 994,
+    "prompt_preview": "You are a helpful Dental & Healthcare Management Assistant. Convert the following database query result into a natural, conversational response.\n\nUser's Question: \"show me total count of sale\"\n\nQuery ...",
+    "http_code": 200,
+    "curl_error": null,
+    "curl_errno": null,
+    "response_status": "SUCCESS",
+    "response": {
+        "candidates": [
+            {
+                "content": {
+                    "parts": [
+                        {
+                            "text": "I've checked, and there are a total of 159 sales recorded in the system."
+                        }
+                    ],
+                    "role": "model"
+                },
+                "finishReason": "STOP",
+                "index": 0
+            }
+        ],
+        "usageMetadata": {
+            "promptTokenCount": 272,
+            "candidatesTokenCount": 21,
+            "totalTokenCount": 860,
+            "promptTokensDetails": [
+                {
+                    "modality": "TEXT",
+                    "tokenCount": 272
+                }
+            ],
+            "thoughtsTokenCount": 567
+        },
+        "modelVersion": "gemini-2.5-flash",
+        "responseId": "baHwaLehLNn6xs0PtaPbyQc"
+    },
+    "generated_at": 1760600430,
+    "generated_at_formatted": "2025-10-16 09:40:30"
+}
+
+{
+    "model": "gemini-2.5-flash",
+    "api_url": "https:\/\/generativelanguage.googleapis.com\/v1beta\/models\/gemini-2.5-flash:generateContent?key=AIzaSyDEciWigJXzgDeCxgWNNXFJfeAdMXQgbq8",
+    "prompt_length": 64541,
+    "prompt_preview": "You are an intelligent Management System Assistant with expertise in SQL query generation.\n\nYour Core Responsibilities:\n1. Analyze user questions in any language and determine if they require database...",
+    "http_code": 200,
+    "curl_error": null,
+    "curl_errno": null,
+    "response_status": "SUCCESS",
+    "response": {
+        "candidates": [
+            {
+                "content": {
+                    "parts": [
+                        {
+                            "text": "{\"type\": \"sql\", \"sql\": \"SELECT SUM(total) AS total_sales_price FROM sale_order LIMIT 300\"}"
+                        }
+                    ],
+                    "role": "model"
+                },
+                "finishReason": "STOP",
+                "index": 0
+            }
+        ],
+        "usageMetadata": {
+            "promptTokenCount": 21558,
+            "candidatesTokenCount": 31,
+            "totalTokenCount": 22194,
+            "cachedContentTokenCount": 20458,
+            "promptTokensDetails": [
+                {
+                    "modality": "TEXT",
+                    "tokenCount": 21558
+                }
+            ],
+            "cacheTokensDetails": [
+                {
+                    "modality": "TEXT",
+                    "tokenCount": 20458
+                }
+            ],
+            "thoughtsTokenCount": 605
+        },
+        "modelVersion": "gemini-2.5-flash",
+        "responseId": "haHwaOTlFr-_vdIPgIm_uQ4"
+    },
+    "generated_at": 1760600453,
+    "generated_at_formatted": "2025-10-16 09:40:53"
+}
+
+{
+    "model": "gemini-2.5-flash",
+    "api_url": "https:\/\/generativelanguage.googleapis.com\/v1beta\/models\/gemini-2.5-flash:generateContent?key=AIzaSyDEciWigJXzgDeCxgWNNXFJfeAdMXQgbq8",
+    "prompt_length": 1015,
+    "prompt_preview": "You are a helpful Dental & Healthcare Management Assistant. Convert the following database query result into a natural, conversational response.\n\nUser's Question: \"show me total price of sales\"\n\nQuery...",
+    "http_code": 200,
+    "curl_error": null,
+    "curl_errno": null,
+    "response_status": "SUCCESS",
+    "response": {
+        "candidates": [
+            {
+                "content": {
+                    "parts": [
+                        {
+                            "text": "Certainly! The grand total for all sales transactions comes out to approximately $5,928,675.35."
+                        }
+                    ],
+                    "role": "model"
+                },
+                "finishReason": "STOP",
+                "index": 0
+            }
+        ],
+        "usageMetadata": {
+            "promptTokenCount": 287,
+            "candidatesTokenCount": 27,
+            "totalTokenCount": 777,
+            "promptTokensDetails": [
+                {
+                    "modality": "TEXT",
+                    "tokenCount": 287
+                }
+            ],
+            "thoughtsTokenCount": 463
+        },
+        "modelVersion": "gemini-2.5-flash",
+        "responseId": "iqHwaIX_LP7BvdIPhevMiQ0"
+    },
+    "generated_at": 1760600459,
+    "generated_at_formatted": "2025-10-16 09:40:59"
+}
+
+{
+    "model": "gemini-2.5-flash",
+    "api_url": "https:\/\/generativelanguage.googleapis.com\/v1beta\/models\/gemini-2.5-flash:generateContent?key=AIzaSyDEciWigJXzgDeCxgWNNXFJfeAdMXQgbq8",
+    "prompt_length": 64319,
+    "prompt_preview": "You are an intelligent Management System Assistant with expertise in SQL query generation.\n\nYour Core Responsibilities:\n1. Analyze user questions in any language and determine if they require database...",
+    "http_code": 200,
+    "curl_error": null,
+    "curl_errno": null,
+    "response_status": "SUCCESS",
+    "response": {
+        "candidates": [
+            {
+                "content": {
+                    "parts": [
+                        {
+                            "text": "{\"type\": \"sql\", \"sql\": \"SELECT COUNT(id) AS total_users FROM user\"}"
+                        }
+                    ],
+                    "role": "model"
+                },
+                "finishReason": "STOP",
+                "index": 0
+            }
+        ],
+        "usageMetadata": {
+            "promptTokenCount": 21516,
+            "candidatesTokenCount": 22,
+            "totalTokenCount": 21692,
+            "cachedContentTokenCount": 20458,
+            "promptTokensDetails": [
+                {
+                    "modality": "TEXT",
+                    "tokenCount": 21516
+                }
+            ],
+            "cacheTokensDetails": [
+                {
+                    "modality": "TEXT",
+                    "tokenCount": 20458
+                }
+            ],
+            "thoughtsTokenCount": 154
+        },
+        "modelVersion": "gemini-2.5-flash",
+        "responseId": "6qHwaNuUF9PPnsEPn4bDsA8"
+    },
+    "generated_at": 1760600554,
+    "generated_at_formatted": "2025-10-16 09:42:34"
+}
+
+{
+    "model": "gemini-2.5-flash",
+    "api_url": "https:\/\/generativelanguage.googleapis.com\/v1beta\/models\/gemini-2.5-flash:generateContent?key=AIzaSyDEciWigJXzgDeCxgWNNXFJfeAdMXQgbq8",
+    "prompt_length": 991,
+    "prompt_preview": "You are a helpful Dental & Healthcare Management Assistant. Convert the following database query result into a natural, conversational response.\n\nUser's Question: \"show me total users count\"\n\nQuery Re...",
+    "http_code": 200,
+    "curl_error": null,
+    "curl_errno": null,
+    "response_status": "SUCCESS",
+    "response": {
+        "candidates": [
+            {
+                "content": {
+                    "parts": [
+                        {
+                            "text": "It looks like we currently have 28 users recorded in the system."
+                        }
+                    ],
+                    "role": "model"
+                },
+                "finishReason": "STOP",
+                "index": 0
+            }
+        ],
+        "usageMetadata": {
+            "promptTokenCount": 270,
+            "candidatesTokenCount": 15,
+            "totalTokenCount": 625,
+            "promptTokensDetails": [
+                {
+                    "modality": "TEXT",
+                    "tokenCount": 270
+                }
+            ],
+            "thoughtsTokenCount": 340
+        },
+        "modelVersion": "gemini-2.5-flash",
+        "responseId": "7qHwaMTuMeHk7M8Pj8XHsQc"
+    },
+    "generated_at": 1760600559,
+    "generated_at_formatted": "2025-10-16 09:42:39"
+}
+
+{
+    "model": "gemini-2.5-flash",
+    "api_url": "https:\/\/generativelanguage.googleapis.com\/v1beta\/models\/gemini-2.5-flash:generateContent?key=AIzaSyDEciWigJXzgDeCxgWNNXFJfeAdMXQgbq8",
+    "prompt_length": 64296,
+    "prompt_preview": "You are an intelligent Management System Assistant with expertise in SQL query generation.\n\nYour Core Responsibilities:\n1. Analyze user questions in any language and determine if they require database...",
+    "http_code": 200,
+    "curl_error": null,
+    "curl_errno": null,
+    "response_status": "SUCCESS",
+    "response": {
+        "candidates": [
+            {
+                "content": {
+                    "parts": [
+                        {
+                            "text": "{\"type\": \"sql\", \"sql\": \"SELECT id, full_name FROM user LIMIT 300\"}"
+                        }
+                    ],
+                    "role": "model"
+                },
+                "finishReason": "STOP",
+                "index": 0
+            }
+        ],
+        "usageMetadata": {
+            "promptTokenCount": 21509,
+            "candidatesTokenCount": 24,
+            "totalTokenCount": 21699,
+            "cachedContentTokenCount": 20458,
+            "promptTokensDetails": [
+                {
+                    "modality": "TEXT",
+                    "tokenCount": 21509
+                }
+            ],
+            "cacheTokensDetails": [
+                {
+                    "modality": "TEXT",
+                    "tokenCount": 20458
+                }
+            ],
+            "thoughtsTokenCount": 166
+        },
+        "modelVersion": "gemini-2.5-flash",
+        "responseId": "AKLwaMbIPJHkkdUPjePXyAc"
+    },
+    "generated_at": 1760600577,
+    "generated_at_formatted": "2025-10-16 09:42:57"
+}
+
+{
+    "model": "gemini-2.5-flash",
+    "api_url": "https:\/\/generativelanguage.googleapis.com\/v1beta\/models\/gemini-2.5-flash:generateContent?key=AIzaSyDEciWigJXzgDeCxgWNNXFJfeAdMXQgbq8",
+    "prompt_length": 1743,
+    "prompt_preview": "You are an intelligent Management System Assistant creating a summary of database query results.\nTask: Analyze the following Management System records and create a clear, concise summary that helps us...",
+    "http_code": 200,
+    "curl_error": null,
+    "curl_errno": null,
+    "response_status": "SUCCESS",
+    "response": {
+        "candidates": [
+            {
+                "content": {
+                    "parts": [
+                        {
+                            "text": "Found 28 records detailing individual profiles. These entries primarily list full names, suggesting a comprehensive roster of users or team members within the system."
+                        }
+                    ],
+                    "role": "model"
+                },
+                "finishReason": "STOP",
+                "index": 0
+            }
+        ],
+        "usageMetadata": {
+            "promptTokenCount": 441,
+            "candidatesTokenCount": 29,
+            "totalTokenCount": 1394,
+            "promptTokensDetails": [
+                {
+                    "modality": "TEXT",
+                    "tokenCount": 441
+                }
+            ],
+            "thoughtsTokenCount": 924
+        },
+        "modelVersion": "gemini-2.5-flash",
+        "responseId": "CKLwaIatKubjkdUPv8DY4A8"
+    },
+    "generated_at": 1760600585,
+    "generated_at_formatted": "2025-10-16 09:43:05"
+}
+
+{
+    "model": "gemini-2.5-flash",
+    "api_url": "https:\/\/generativelanguage.googleapis.com\/v1beta\/models\/gemini-2.5-flash:generateContent?key=AIzaSyDEciWigJXzgDeCxgWNNXFJfeAdMXQgbq8",
+    "prompt_length": 64424,
+    "prompt_preview": "You are an intelligent Management System Assistant with expertise in SQL query generation.\n\nYour Core Responsibilities:\n1. Analyze user questions in any language and determine if they require database...",
+    "http_code": 200,
+    "curl_error": null,
+    "curl_errno": null,
+    "response_status": "SUCCESS",
+    "response": {
+        "candidates": [
+            {
+                "content": {
+                    "parts": [
+                        {
+                            "text": "{\"type\": \"sql\", \"sql\": \"SELECT id AS Serial_Number, full_name AS User_Name FROM user LIMIT 300\"}"
+                        }
+                    ],
+                    "role": "model"
+                },
+                "finishReason": "STOP",
+                "index": 0
+            }
+        ],
+        "usageMetadata": {
+            "promptTokenCount": 21519,
+            "candidatesTokenCount": 32,
+            "totalTokenCount": 21707,
+            "cachedContentTokenCount": 20458,
+            "promptTokensDetails": [
+                {
+                    "modality": "TEXT",
+                    "tokenCount": 21519
+                }
+            ],
+            "cacheTokensDetails": [
+                {
+                    "modality": "TEXT",
+                    "tokenCount": 20458
+                }
+            ],
+            "thoughtsTokenCount": 156
+        },
+        "modelVersion": "gemini-2.5-flash",
+        "responseId": "HKLwaI64E_jBkdUP7PS8wAc"
+    },
+    "generated_at": 1760600604,
+    "generated_at_formatted": "2025-10-16 09:43:24"
+}
+
+{
+    "model": "gemini-2.5-flash",
+    "api_url": "https:\/\/generativelanguage.googleapis.com\/v1beta\/models\/gemini-2.5-flash:generateContent?key=AIzaSyDEciWigJXzgDeCxgWNNXFJfeAdMXQgbq8",
+    "prompt_length": 1853,
+    "prompt_preview": "You are an intelligent Management System Assistant creating a summary of database query results.\nTask: Analyze the following Management System records and create a clear, concise summary that helps us...",
+    "http_code": 200,
+    "curl_error": null,
+    "curl_errno": null,
+    "response_status": "SUCCESS",
+    "response": {
+        "candidates": [
+            {
+                "content": {
+                    "parts": [
+                        {
+                            "text": "Found 28 record(s) detailing system users. This data provides a comprehensive list of individuals, each uniquely identified by a Serial Number and their respective User Name, indicating a roster of personnel or accounts within your system."
+                        }
+                    ],
+                    "role": "model"
+                },
+                "finishReason": "STOP",
+                "index": 0
+            }
+        ],
+        "usageMetadata": {
+            "promptTokenCount": 461,
+            "candidatesTokenCount": 45,
+            "totalTokenCount": 1364,
+            "promptTokensDetails": [
+                {
+                    "modality": "TEXT",
+                    "tokenCount": 461
+                }
+            ],
+            "thoughtsTokenCount": 858
+        },
+        "modelVersion": "gemini-2.5-flash",
+        "responseId": "I6LwaMf5M_b4nsEP-_awuQo"
+    },
+    "generated_at": 1760600612,
+    "generated_at_formatted": "2025-10-16 09:43:32"
+}
+
+{
+    "model": "gemini-2.5-flash",
+    "api_url": "https:\/\/generativelanguage.googleapis.com\/v1beta\/models\/gemini-2.5-flash:generateContent?key=AIzaSyDEciWigJXzgDeCxgWNNXFJfeAdMXQgbq8",
+    "prompt_length": 12193,
+    "prompt_preview": "You are a database analysis expert. Analyze the following database schema and provide insights for generating intelligent AI prompts.\n\nDatabase Schema:\nDATABASE SCHEMA (Complete structure with all col...",
+    "http_code": 200,
+    "curl_error": null,
+    "curl_errno": null,
+    "response_status": "SUCCESS",
+    "response": {
+        "candidates": [
+            {
+                "content": {
+                    "parts": [
+                        {
+                            "text": "```json\n{\n  \"database_type\": \"Fuel Station Management System\",\n  \"key_entities\": [\n    \"Pumps\",\n    \"Accounts\",\n    \"Products\",\n    \"Sales\",\n    \"Purchases\",\n    \"Expenses\",\n    \"Loans\",\n    \"Users\",\n    \"Dispensers\",\n    \"Dip Readings\",\n    \"Payables\",\n    \"Receivables\",\n    \"Transactions\"\n  ],\n  \"business_context\": \"This system is designed for managing the day-to-day operations and financial aspects of one or more fuel stations (referred to as 'pumps'). It tracks sales of various products (like fuel) through specific dispensers, manages product purchases from suppliers, records all business expenses, handles financial accounts, loans, payables, and receivables. Inventory levels are monitored via dipreader entries for tanks. The system also includes comprehensive user management, activity logging, and notification capabilities, providing a complete solution for fuel station owners and managers to monitor their business performance.\",\n  \"common_queries\": [\n    \"What were the total sales for Pump 'X' yesterday, broken down by product?\",\n    \"Show the current balance for all financial accounts at Pump 'Y'.\",\n    \"List all outstanding loans and their remaining amounts for Pump 'Z'.\",\n    \"What is the total quantity of 'Petrol' purchased in the last month across all pumps?\",\n    \"Display the latest dip reader entries for all tanks at Pump 'A'.\",\n    \"Generate a report of all expenses categorized by expense type for Q1 of the current year.\",\n    \"Who are the users associated with Pump 'B' and what are their roles?\",\n    \"Show all receivables owed to Pump 'C' that are currently overdue.\"\n  ],\n  \"specialized_terminology\": {\n    \"Pump\": \"A physical fuel station location, serving as the main business unit.\",\n    \"Dispenser\": \"A specific fuel pump at a station where fuel is dispensed to vehicles.\",\n    \"Dipreader\": \"A record of the measurement of fuel levels in underground storage tanks.\",\n    \"Account\": \"A financial ledger entry for tracking money, e.g., Cash, Bank, Credit Card accounts.\",\n    \"Payable\": \"Amounts of money the pump (business) owes to suppliers or other creditors.\",\n    \"Receivable\": \"Amounts of money owed to the pump (business) by customers or other debtors.\",\n    \"Is_Credit\": \"A flag (typically 1 for true, 0 for false) indicating if a sale or purchase transaction was made on credit, meaning payment is deferred.\",\n    \"Product\": \"Refers to different types of fuel (e.g., Petrol, Diesel) or other convenience store items sold at the pump.\",\n    \"Transaction\": \"A financial movement of money between accounts or recording of a financial event.\"\n  },\n  \"relationships\": \"The `pump` table is the central entity, representing an individual fuel station. Many other tables, including `account`, `dipreader`, `dispenser`, `expense`, `loan`, `product`, `purchase`, `sale`, `transaction`, `user`, and `user_log`, are directly associated with a specific `pump` through a `pump_id` foreign key. `Account`s are categorized by `account_type`s and are involved in `expense`, `loan`, `payable`, `receivable`, and `transaction` records. `Product`s, categorized by `product_type`, are sold through `dispenser`s and are detailed in `purchase_item` and `sale_item` records. `Sale`s track overall transactions, linking to a `dispenser` and containing multiple `sale_item`s. `Purchase`s similarly contain `purchase_item`s. `User`s are tied to a `pump` and their activities are logged in `user_log` and `device_tokens`.\",\n  \"user_roles\": [\n    \"Station Manager\/Owner (full oversight over a pump's operations, finances, and staff)\",\n    \"Pump Operator\/Cashier (responsible for daily sales, purchases, and dip readings)\",\n    \"Accountant\/Finance Staff (manages expenses, loans, payables, and receivables)\",\n    \"System Administrator (for managing user accounts and system configuration, potentially across multiple pumps)\"\n  ],\n  \"workflow_patterns\": \"1. **Sales Processing**: A customer makes a purchase. The pump operator records a `sale` (linked to a `dispenser` and `pump`), detailing `sale_item`s (product, quantity, price) and specifying `pay_mode` (cash, online, club) and `is_credit` status, potentially generating a `receivable` entry. \\n2. **Purchase & Inventory Management**: Fuel or other products are acquired from a supplier. A `purchase` record is created (linked to `pump` and `supplier`), detailing `purchase_item`s (product, quantity, price, payment received). `Dipreader` entries are made periodically to monitor and verify physical fuel tank levels. \\n3. **Financial Management**: Daily business `expense`s are recorded, categorized by `expense_type`, and linked to an `account`. `Loan`s are managed, tracking `amount` and `remainig_amount`. `Payable` and `receivable` entries are generated and tracked based on credit sales, purchases, and other financial obligations. `Transaction`s record movements between `account`s. \\n4. **User Activity & Notifications**: Users log into the system, perform operations, and their actions are recorded in `user_log`. System or user-specific `notifications` are generated and managed.\"\n}\n```"
+                        }
+                    ],
+                    "role": "model"
+                },
+                "finishReason": "STOP",
+                "index": 0
+            }
+        ],
+        "usageMetadata": {
+            "promptTokenCount": 3888,
+            "candidatesTokenCount": 1219,
+            "totalTokenCount": 7647,
+            "promptTokensDetails": [
+                {
+                    "modality": "TEXT",
+                    "tokenCount": 3888
+                }
+            ],
+            "thoughtsTokenCount": 2540
+        },
+        "modelVersion": "gemini-2.5-flash",
+        "responseId": "xaLwaLDJCfjBkdUP7PS8wAc"
+    },
+    "generated_at": 1760600773,
+    "generated_at_formatted": "2025-10-16 09:46:13"
+}
+
+{
+    "model": "gemini-2.5-flash",
+    "api_url": "https:\/\/generativelanguage.googleapis.com\/v1beta\/models\/gemini-2.5-flash:generateContent?key=AIzaSyDEciWigJXzgDeCxgWNNXFJfeAdMXQgbq8",
+    "prompt_length": 14951,
+    "prompt_preview": "You are a UI\/UX expert specializing in database-driven application design. Analyze the database schema below and generate an intelligent UI configuration. application name will be similar to the datab...",
+    "http_code": 200,
+    "curl_error": null,
+    "curl_errno": null,
+    "response_status": "SUCCESS",
+    "response": {
+        "candidates": [
+            {
+                "content": {
+                    "parts": [
+                        {
+                            "text": "```json\n{\n  \"application_type\": \"Fuel Station Management System\",\n  \"page_title\": \"PumpFlow Dashboard\",\n  \"header_title\": \"PumpFlow Management System\",\n  \"header_subtitle\": \"Streamline your fuel station operations with intelligent insights.\",\n  \"welcome_message\": \"👋 Welcome back! I'm your PumpFlow AI Assistant. I can help you quickly access critical information and manage your daily operations.\",\n  \"placeholder_text\": \"Ask me about sales, inventory, expenses, or anything else...\",\n  \"branding\": {\n    \"primary_color\": \"#0056b3\",\n    \"secondary_color\": \"#4CAF50\",\n    \"accent_color\": \"#FFC107\",\n    \"icon\": \"fas fa-gas-pump\",\n    \"personality\": \"An efficient, reliable, and intelligent assistant for managing fuel station operations.\"\n  },\n  \"quick_suggestions\": [\n    {\n      \"text\": \"Today's Sales\",\n      \"question\": \"Show all sales transactions recorded for today\",\n      \"icon\": \"fas fa-cash-register\"\n    },\n    {\n      \"text\": \"Tank Inventory\",\n      \"question\": \"Display the latest fuel tank inventory readings from dipreaders\",\n      \"icon\": \"fas fa-oil-can\"\n    },\n    {\n      \"text\": \"Recent Purchases\",\n      \"question\": \"List all purchases made in the last 24 hours\",\n      \"icon\": \"fas fa-truck-loading\"\n    },\n    {\n      \"text\": \"Today's Expenses\",\n      \"question\": \"Show all expenses recorded for today's date\",\n      \"icon\": \"fas fa-money-bill-wave\"\n    },\n    {\n      \"text\": \"Account Balances\",\n      \"question\": \"Show current balances for all financial accounts\",\n      \"icon\": \"fas fa-wallet\"\n    },\n    {\n      \"text\": \"Active Dispensers\",\n      \"question\": \"List all fuel dispensers that are currently active\",\n      \"icon\": \"fas fa-charging-station\"\n    },\n    {\n      \"text\": \"Unpaid Receivables\",\n      \"question\": \"Show all outstanding amounts due from customers\",\n      \"icon\": \"fas fa-hand-holding-dollar\"\n    },\n    {\n      \"text\": \"Unpaid Payables\",\n      \"question\": \"Show all outstanding amounts owed to suppliers\",\n      \"icon\": \"fas fa-file-invoice-dollar\"\n    },\n    {\n      \"text\": \"Current Product Prices\",\n      \"question\": \"Display the current selling price for each product\",\n      \"icon\": \"fas fa-tags\"\n    },\n    {\n      \"text\": \"Recent User Activity\",\n      \"question\": \"Show the latest user activity logs in the system\",\n      \"icon\": \"fas fa-user-clock\"\n    }\n  ],\n  \"generated_at\": \"2024-07-30T10:30:00Z\"\n}\n```"
+                        }
+                    ],
+                    "role": "model"
+                },
+                "finishReason": "STOP",
+                "index": 0
+            }
+        ],
+        "usageMetadata": {
+            "promptTokenCount": 4615,
+            "candidatesTokenCount": 691,
+            "totalTokenCount": 7944,
+            "promptTokensDetails": [
+                {
+                    "modality": "TEXT",
+                    "tokenCount": 4615
+                }
+            ],
+            "thoughtsTokenCount": 2638
+        },
+        "modelVersion": "gemini-2.5-flash",
+        "responseId": "26LwaLmQGYShkdUPx63FkQI"
+    },
+    "generated_at": 1760600796,
+    "generated_at_formatted": "2025-10-16 09:46:36"
+}
+
+{
+    "model": "gemini-2.5-flash",
+    "api_url": "https:\/\/generativelanguage.googleapis.com\/v1beta\/models\/gemini-2.5-flash:generateContent?key=AIzaSyDEciWigJXzgDeCxgWNNXFJfeAdMXQgbq8",
+    "prompt_length": 26032,
+    "prompt_preview": "You are an intelligent Management System Assistant with expertise in SQL query generation.\n\nYour Core Responsibilities:\n1. Analyze user questions in any language and determine if they require database...",
+    "http_code": 200,
+    "curl_error": null,
+    "curl_errno": null,
+    "response_status": "SUCCESS",
+    "response": {
+        "candidates": [
+            {
+                "content": {
+                    "parts": [
+                        {
+                            "text": "{\"type\": \"sql\", \"sql\": \"SELECT p.name AS pump_name, p.location AS pump_location FROM pump p ORDER BY p.name ASC LIMIT 300\"}"
+                        }
+                    ],
+                    "role": "model"
+                },
+                "finishReason": "STOP",
+                "index": 0
+            }
+        ],
+        "usageMetadata": {
+            "promptTokenCount": 7159,
+            "candidatesTokenCount": 41,
+            "totalTokenCount": 7520,
+            "promptTokensDetails": [
+                {
+                    "modality": "TEXT",
+                    "tokenCount": 7159
+                }
+            ],
+            "thoughtsTokenCount": 320
+        },
+        "modelVersion": "gemini-2.5-flash",
+        "responseId": "AaPwaNiUA-aXvdIPh8vgqA8"
+    },
+    "generated_at": 1760600833,
+    "generated_at_formatted": "2025-10-16 09:47:13"
+}
+
+{
+    "model": "gemini-2.5-flash",
+    "api_url": "https:\/\/generativelanguage.googleapis.com\/v1beta\/models\/gemini-2.5-flash:generateContent?key=AIzaSyDEciWigJXzgDeCxgWNNXFJfeAdMXQgbq8",
+    "prompt_length": 25873,
+    "prompt_preview": "You are an intelligent Management System Assistant with expertise in SQL query generation.\n\nYour Core Responsibilities:\n1. Analyze user questions in any language and determine if they require database...",
+    "http_code": 200,
+    "curl_error": null,
+    "curl_errno": null,
+    "response_status": "SUCCESS",
+    "response": {
+        "candidates": [
+            {
+                "content": {
+                    "parts": [
+                        {
+                            "text": "{\"type\": \"sql\", \"sql\": \"SELECT p.name AS pump_name, SUM(s.total_amount) AS total_sales_amount FROM sale s LEFT JOIN pump p ON s.pump_id = p.id GROUP BY p.id, p.name ORDER BY total_sales_amount DESC LIMIT 300\"}"
+                        }
+                    ],
+                    "role": "model"
+                },
+                "finishReason": "STOP",
+                "index": 0
+            }
+        ],
+        "usageMetadata": {
+            "promptTokenCount": 7139,
+            "candidatesTokenCount": 73,
+            "totalTokenCount": 7438,
+            "cachedContentTokenCount": 6124,
+            "promptTokensDetails": [
+                {
+                    "modality": "TEXT",
+                    "tokenCount": 7139
+                }
+            ],
+            "cacheTokensDetails": [
+                {
+                    "modality": "TEXT",
+                    "tokenCount": 6124
+                }
+            ],
+            "thoughtsTokenCount": 226
+        },
+        "modelVersion": "gemini-2.5-flash",
+        "responseId": "E6PwaIuuNOWMvdIPg-vuuAM"
+    },
+    "generated_at": 1760600852,
+    "generated_at_formatted": "2025-10-16 09:47:32"
+}
+
+{
+    "model": "gemini-2.5-flash",
+    "api_url": "https:\/\/generativelanguage.googleapis.com\/v1beta\/models\/gemini-2.5-flash:generateContent?key=AIzaSyDEciWigJXzgDeCxgWNNXFJfeAdMXQgbq8",
+    "prompt_length": 1036,
+    "prompt_preview": "You are a helpful Dental & Healthcare Management Assistant. Convert the following database query result into a natural, conversational response.\n\nUser's Question: \"show me pump with its top sales\"\n\nQu...",
+    "http_code": 200,
+    "curl_error": null,
+    "curl_errno": null,
+    "response_status": "SUCCESS",
+    "response": {
+        "candidates": [
+            {
+                "content": {
+                    "parts": [
+                        {
+                            "text": "Absolutely! The Tarlai Pump is your top seller, having generated an impressive $813,583.00 in total sales."
+                        }
+                    ],
+                    "role": "model"
+                },
+                "finishReason": "STOP",
+                "index": 0
+            }
+        ],
+        "usageMetadata": {
+            "promptTokenCount": 289,
+            "candidatesTokenCount": 31,
+            "totalTokenCount": 878,
+            "promptTokensDetails": [
+                {
+                    "modality": "TEXT",
+                    "tokenCount": 289
+                }
+            ],
+            "thoughtsTokenCount": 558
+        },
+        "modelVersion": "gemini-2.5-flash",
+        "responseId": "GaPwaO3TNrK8vdIPvPbfkAM"
+    },
+    "generated_at": 1760600858,
+    "generated_at_formatted": "2025-10-16 09:47:38"
+}
+
+{
+    "model": "gemini-2.5-flash",
+    "api_url": "https:\/\/generativelanguage.googleapis.com\/v1beta\/models\/gemini-2.5-flash:generateContent?key=AIzaSyDEciWigJXzgDeCxgWNNXFJfeAdMXQgbq8",
+    "prompt_length": 25979,
+    "prompt_preview": "You are an intelligent Management System Assistant with expertise in SQL query generation.\n\nYour Core Responsibilities:\n1. Analyze user questions in any language and determine if they require database...",
+    "http_code": 200,
+    "curl_error": null,
+    "curl_errno": null,
+    "response_status": "SUCCESS",
+    "response": {
+        "candidates": [
+            {
+                "content": {
+                    "parts": [
+                        {
+                            "text": "{\"type\": \"sql\", \"sql\": \"SELECT p.name AS pump_name, SUM(s.total_amount) AS total_sales, DATE_FORMAT(MAX(s.sale_date), '%M %d, %Y') AS latest_sale_date FROM pump AS p LEFT JOIN sale AS s ON p.id = s.pump_id GROUP BY p.id, p.name ORDER BY total_sales DESC LIMIT 300\"}"
+                        }
+                    ],
+                    "role": "model"
+                },
+                "finishReason": "STOP",
+                "index": 0
+            }
+        ],
+        "usageMetadata": {
+            "promptTokenCount": 7213,
+            "candidatesTokenCount": 98,
+            "totalTokenCount": 8351,
+            "cachedContentTokenCount": 6124,
+            "promptTokensDetails": [
+                {
+                    "modality": "TEXT",
+                    "tokenCount": 7213
+                }
+            ],
+            "cacheTokensDetails": [
+                {
+                    "modality": "TEXT",
+                    "tokenCount": 6124
+                }
+            ],
+            "thoughtsTokenCount": 1040
+        },
+        "modelVersion": "gemini-2.5-flash",
+        "responseId": "caPwaIm6Ft7sxs0P7Kyl4AQ"
+    },
+    "generated_at": 1760600946,
+    "generated_at_formatted": "2025-10-16 09:49:06"
+}
+
+{
+    "model": "gemini-2.5-flash",
+    "api_url": "https:\/\/generativelanguage.googleapis.com\/v1beta\/models\/gemini-2.5-flash:generateContent?key=AIzaSyDEciWigJXzgDeCxgWNNXFJfeAdMXQgbq8",
+    "prompt_length": 25736,
+    "prompt_preview": "You are an intelligent Management System Assistant with expertise in SQL query generation.\n\nYour Core Responsibilities:\n1. Analyze user questions in any language and determine if they require database...",
+    "http_code": 200,
+    "curl_error": null,
+    "curl_errno": null,
+    "response_status": "SUCCESS",
+    "response": {
+        "candidates": [
+            {
+                "content": {
+                    "parts": [
+                        {
+                            "text": "{\"type\": \"sql\", \"sql\": \"SELECT p.name AS product_name, p.price, p.unit, pt.name AS product_type, pu.name AS pump_name FROM product p LEFT JOIN product_type pt ON p.product_type_id = pt.id LEFT JOIN pump pu ON p.pump_id = pu.id LIMIT 300\"}"
+                        }
+                    ],
+                    "role": "model"
+                },
+                "finishReason": "STOP",
+                "index": 0
+            }
+        ],
+        "usageMetadata": {
+            "promptTokenCount": 7131,
+            "candidatesTokenCount": 83,
+            "totalTokenCount": 7528,
+            "cachedContentTokenCount": 6124,
+            "promptTokensDetails": [
+                {
+                    "modality": "TEXT",
+                    "tokenCount": 7131
+                }
+            ],
+            "cacheTokensDetails": [
+                {
+                    "modality": "TEXT",
+                    "tokenCount": 6124
+                }
+            ],
+            "thoughtsTokenCount": 314
+        },
+        "modelVersion": "gemini-2.5-flash",
+        "responseId": "v6PwaLKNKKeWvdIPyuPHiAM"
+    },
+    "generated_at": 1760601024,
+    "generated_at_formatted": "2025-10-16 09:50:24"
+}
+
+{
+    "model": "gemini-2.5-flash",
+    "api_url": "https:\/\/generativelanguage.googleapis.com\/v1beta\/models\/gemini-2.5-flash:generateContent?key=AIzaSyDEciWigJXzgDeCxgWNNXFJfeAdMXQgbq8",
+    "prompt_length": 1572,
+    "prompt_preview": "You are an intelligent Management System Assistant creating a summary of database query results.\nTask: Analyze the following Management System records and create a clear, concise summary that helps us...",
+    "http_code": 200,
+    "curl_error": null,
+    "curl_errno": null,
+    "response_status": "SUCCESS",
+    "response": {
+        "candidates": [
+            {
+                "content": {
+                    "parts": [
+                        {
+                            "text": "Found 4 record(s) detailing various inventory products. These products encompass fuels like 'Super GL' and 'HSD', a 'Lubricant' (Engine Oil), and 'HPG', with prices spanning a wide range from 200.00 to 8000.00. Notably, the two fuel products are similarly priced around 300.00, while 'Engine Oil' is the highest-priced item, and 'HPG' is the lowest."
+                        }
+                    ],
+                    "role": "model"
+                },
+                "finishReason": "STOP",
+                "index": 0
+            }
+        ],
+        "usageMetadata": {
+            "promptTokenCount": 397,
+            "candidatesTokenCount": 104,
+            "totalTokenCount": 1597,
+            "promptTokensDetails": [
+                {
+                    "modality": "TEXT",
+                    "tokenCount": 397
+                }
+            ],
+            "thoughtsTokenCount": 1096
+        },
+        "modelVersion": "gemini-2.5-flash",
+        "responseId": "yKPwaLHJK5PYxs0P8oT10A0"
+    },
+    "generated_at": 1760601033,
+    "generated_at_formatted": "2025-10-16 09:50:33"
+}
+
+{
+    "model": "gemini-2.5-flash",
+    "api_url": "https:\/\/generativelanguage.googleapis.com\/v1beta\/models\/gemini-2.5-flash:generateContent?key=AIzaSyDEciWigJXzgDeCxgWNNXFJfeAdMXQgbq8",
+    "prompt_length": 26147,
+    "prompt_preview": "You are an intelligent Management System Assistant with expertise in SQL query generation.\n\nYour Core Responsibilities:\n1. Analyze user questions in any language and determine if they require database...",
+    "http_code": 200,
+    "curl_error": null,
+    "curl_errno": null,
+    "response_status": "SUCCESS",
+    "response": {
+        "candidates": [
+            {
+                "content": {
+                    "parts": [
+                        {
+                            "text": "{\"type\": \"text\", \"text\": \"To add a new product, please provide the name, price, unit, and specify which pump it belongs to. Also, we need to ensure the product type 'fuell' is correctly categorized in our system, or provide an existing product type. Could you please provide these details?\"}"
+                        }
+                    ],
+                    "role": "model"
+                },
+                "finishReason": "STOP",
+                "index": 0
+            }
+        ],
+        "usageMetadata": {
+            "promptTokenCount": 7250,
+            "candidatesTokenCount": 68,
+            "totalTokenCount": 9753,
+            "cachedContentTokenCount": 6124,
+            "promptTokensDetails": [
+                {
+                    "modality": "TEXT",
+                    "tokenCount": 7250
+                }
+            ],
+            "cacheTokensDetails": [
+                {
+                    "modality": "TEXT",
+                    "tokenCount": 6124
+                }
+            ],
+            "thoughtsTokenCount": 2435
+        },
+        "modelVersion": "gemini-2.5-flash",
+        "responseId": "FqTwaODWBdy5nsEP5ou9sQU"
+    },
+    "generated_at": 1760601110,
+    "generated_at_formatted": "2025-10-16 09:51:50"
+}
+
+{
+    "model": "gemini-2.5-flash",
+    "api_url": "https:\/\/generativelanguage.googleapis.com\/v1beta\/models\/gemini-2.5-flash:generateContent?key=AIzaSyDEciWigJXzgDeCxgWNNXFJfeAdMXQgbq8",
+    "prompt_length": 26719,
+    "prompt_preview": "You are an intelligent Management System Assistant with expertise in SQL query generation.\n\nYour Core Responsibilities:\n1. Analyze user questions in any language and determine if they require database...",
+    "http_code": 200,
+    "curl_error": null,
+    "curl_errno": null,
+    "response_status": "SUCCESS",
+    "response": {
+        "candidates": [
+            {
+                "content": {
+                    "parts": [
+                        {
+                            "text": "{\"type\": \"sql\", \"sql\": \"SELECT p.name AS product_name, pt.name AS product_type, p.price, p.unit, pm.name AS pump_name FROM product p LEFT JOIN product_type pt ON p.product_type_id = pt.id LEFT JOIN pump pm ON p.pump_id = pm.id LIMIT 300\"}"
+                        }
+                    ],
+                    "role": "model"
+                },
+                "finishReason": "STOP",
+                "index": 0
+            }
+        ],
+        "usageMetadata": {
+            "promptTokenCount": 7372,
+            "candidatesTokenCount": 83,
+            "totalTokenCount": 13091,
+            "cachedContentTokenCount": 6124,
+            "promptTokensDetails": [
+                {
+                    "modality": "TEXT",
+                    "tokenCount": 7372
+                }
+            ],
+            "cacheTokensDetails": [
+                {
+                    "modality": "TEXT",
+                    "tokenCount": 6124
+                }
+            ],
+            "thoughtsTokenCount": 5636
+        },
+        "modelVersion": "gemini-2.5-flash",
+        "responseId": "tKTwaJX0OfPXkdUPn7GA8QY"
+    },
+    "generated_at": 1760601269,
+    "generated_at_formatted": "2025-10-16 09:54:29"
+}
+
+{
+    "model": "gemini-2.5-flash",
+    "api_url": "https:\/\/generativelanguage.googleapis.com\/v1beta\/models\/gemini-2.5-flash:generateContent?key=AIzaSyDEciWigJXzgDeCxgWNNXFJfeAdMXQgbq8",
+    "prompt_length": 1572,
+    "prompt_preview": "You are an intelligent Management System Assistant creating a summary of database query results.\nTask: Analyze the following Management System records and create a clear, concise summary that helps us...",
+    "http_code": 200,
+    "curl_error": null,
+    "curl_errno": null,
+    "response_status": "SUCCESS",
+    "response": {
+        "candidates": [
+            {
+                "content": {
+                    "parts": [
+                        {
+                            "text": "Found 4 record(s). These records detail various products available, including two types of fuel ('Super GL' and 'HSD') and a lubricant ('Engine Oil'), along with another item, 'HPG'. The prices for these products show a significant range, from 200.00 per KG for 'HPG' to 8,000.00 per Bottle for 'Engine Oil'."
+                        }
+                    ],
+                    "role": "model"
+                },
+                "finishReason": "STOP",
+                "index": 0
+            }
+        ],
+        "usageMetadata": {
+            "promptTokenCount": 397,
+            "candidatesTokenCount": 86,
+            "totalTokenCount": 1327,
+            "promptTokensDetails": [
+                {
+                    "modality": "TEXT",
+                    "tokenCount": 397
+                }
+            ],
+            "thoughtsTokenCount": 844
+        },
+        "modelVersion": "gemini-2.5-flash",
+        "responseId": "vaTwaMCzBubNkdUP__zMiA8"
+    },
+    "generated_at": 1760601277,
+    "generated_at_formatted": "2025-10-16 09:54:37"
+}
+

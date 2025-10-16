@@ -17,7 +17,9 @@
   "prefer-stable": true,
   "autoload": {
     "psr-4": {
-      "Ignite\\": "src/"
+      "App\\": "app/",
+      "Config\\": "config/",
+      "Ignitephp\\": "src/"
     }
   },
   "scripts": {

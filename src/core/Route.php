@@ -1,8 +1,8 @@
 <?php
 
-namespace Ignite\Core;
+namespace Ignitephp\Core;
 
-use Ignite\Core\Router;
+use Ignitephp\Core\Router;
 
 class Route
 {

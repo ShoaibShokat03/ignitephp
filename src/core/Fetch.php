@@ -1,6 +1,6 @@
 <?php
 
-namespace Ignite\Core;
+namespace Ignitephp\Core;
 
 class Fetch
 {
