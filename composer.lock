@@ -69,7 +69,7 @@
             "time": "2024-07-20T21:45:45+00:00"
         },
         {
-            "name": "ignitephp/ignitephp",
+            "name": "ignitephp/project",
             "version": "dev-main",
             "source": {
                 "type": "git",
@@ -510,7 +510,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "ignitephp/ignitephp": 20
+        "ignitephp/project": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
