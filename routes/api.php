@@ -22,3 +22,13 @@ Route::get("/", function () {
         "message" => "Hello, Welcome to ignitephp!",
     ];
 });
+
+Route::post("/login",function (){
+    $data=Request::getJson();
+
+    return [
+        "Method"=>Request::getMethod(),
+        "Request"=>Request::get("name"),
+        "message"=>"Hello, Welcome to ignitephp!",
+    ]
+});
