@@ -30,5 +30,5 @@ Route::post("/login",function (){
         "Method"=>Request::getMethod(),
         "Request"=>Request::get("name"),
         "message"=>"Hello, Welcome to ignitephp!",
-    ]
+    ];
 });
