@@ -16,10 +16,10 @@ class Db
 
     public function __construct()
     {
-        $this->localhost = "localhost";
-        $this->username = "root";
-        $this->password = "";
-        $this->db = "enteryourdatabase";
+        $this->localhost = $_ENV['DATABASE_SERVER_NAME'] ?? "localhost";
+        $this->username = $_ENV['DATABASE_USERNAME'] ?? "root";
+        $this->password = $_ENV['DB_PASSWORD'] ?? "";
+        $this->db = $_ENV['DATABASE_NAME'] ?? "test_db";
         $this->db_name = $this->db;
     }
 
@@ -60,5 +60,10 @@ class Db
     public function error()
     {
         return $this->conn->error;
+    }
+
+    public function escape(string $string): string
+    {
+        return $this->conn->real_escape_string($string);
     }
 }

@@ -45,11 +45,46 @@ class Route
         self::$router->add('PATCH', $path, $handler);
     }
 
-    public static function dispatch()
+    /**
+     * Set the source for route registration (used for conflict detection)
+     */
+    public static function setSource(string $source): void
     {
         self::init();
-        $method = $_SERVER['REQUEST_METHOD'];
-        $uri    = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-        return self::$router->dispatch($method, $uri); // ✅ Return it!
+        Router::setSource($source);
+    }
+
+    /**
+     * Get the router instance (for conflict checking)
+     */
+    public static function getRouter(): ?Router
+    {
+        self::init();
+        return self::$router;
+    }
+
+    public static function dispatch()
+    {
+        try {
+            self::init();
+            $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
+            $uri    = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH);
+            
+            if (empty($uri)) {
+                $uri = '/';
+            }
+            
+            return self::$router->dispatch($method, $uri);
+        } catch (\Throwable $e) {
+            http_response_code(500);
+            return [
+                'status' => 'error',
+                'message' => 'Route dispatch error',
+                'error_detail' => $e->getMessage(),
+                'file' => $e->getFile(),
+                'line' => $e->getLine()
+            ];
+        }
     }
 }
+

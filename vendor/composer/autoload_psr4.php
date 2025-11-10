@@ -10,10 +10,11 @@ return array(
     'Symfony\\Polyfill\\Mbstring\\' => array($vendorDir . '/symfony/polyfill-mbstring'),
     'Symfony\\Polyfill\\Ctype\\' => array($vendorDir . '/symfony/polyfill-ctype'),
     'PhpOption\\' => array($vendorDir . '/phpoption/phpoption/src/PhpOption'),
-    'Ignitephp\\' => array($baseDir . '/src'),
+    'Ignitephp\\Core\\' => array($baseDir . '/app/core'),
     'Ignite\\' => array($vendorDir . '/ignitephp/ignitephp/src'),
     'GrahamCampbell\\ResultType\\' => array($vendorDir . '/graham-campbell/result-type/src'),
     'Dotenv\\' => array($vendorDir . '/vlucas/phpdotenv/src'),
     'Config\\' => array($baseDir . '/config'),
+    'App\\Modules\\' => array($baseDir . '/modules'),
     'App\\' => array($baseDir . '/app'),
 );

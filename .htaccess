@@ -1,4 +1,12 @@
-RewriteEngine on
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule . index.php [L]
+# Block everything except public/ and index.php
+
+RewriteEngine On
+
+# Allow direct access to index.php
+RewriteRule ^index\.php$ - [L]
+
+# Allow access to public folder and all its contents
+RewriteRule ^public/ - [L]
+
+# Redirect everything else to index.php
+RewriteRule ^(.*)$ index.php [L]

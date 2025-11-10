@@ -1,34 +1,58 @@
 <?php
 
-use App\Agent\Agent;
-use App\Agent\AgentInitializer;
-use App\Bot\Chat;
-use App\Database\Db;
-use App\Config\Gemini;
-use App\Markdown\ResponseFormatter;
-use App\Charts\ChartGenerator;
-use App\Cache\QueryCache;
+/**
+ * Simple API Routes
+ * 
+ * This file allows you to create routes without using the modular approach.
+ * Perfect for quick prototypes, simple APIs, or when you prefer traditional routing.
+ * 
+ * Usage:
+ * Route::get('/path', function() { return ['data' => 'value']; });
+ * Route::post('/path', function() { return ['data' => 'value']; });
+ */
+
+use App\Core\UrlHelper;
 use Ignitephp\Core\Route;
 use Ignitephp\Core\Request;
 
+// ============================================
+// Example Routes (Remove or modify as needed)
+// ============================================
 
-Route::get("/", function () {
-
-    $data = Request::getJson();
-
+// Home/Welcome route
+Route::get('/', function () {
     return [
-        "Method" => Request::getMethod(),
-        "Request" => Request::get("name"),
-        "message" => "Hello, Welcome to ignitephp!",
+        'status' => 'success',
+        'message' => 'Welcome to IgnitePHP API',
+        'version' => '1.2.0',
+        'timestamp' => date('Y-m-d H:i:s')
     ];
 });
 
-Route::post("/login",function (){
-    $data=Request::getJson();
-
+// Get Image
+Route::get('/image', function () {
     return [
-        "Method"=>Request::getMethod(),
-        "Request"=>Request::get("name"),
-        "message"=>"Hello, Welcome to ignitephp!",
+        'status' => 'success',
+        'message' => 'Image',
+        'image' => UrlHelper::baseUrl() . '/public/me.jfif',
+        'image_full' => UrlHelper::publicUrlFull('me.jfif'),
+    ];
+});
+
+// Health check route
+Route::get('/health', function () {
+    return [
+        'status' => 'healthy',
+        'server' => 'running',
+        'timestamp' => date('Y-m-d H:i:s')
+    ];
+});
+
+// Example: Simple GET route
+Route::get('/example', function () {
+    return [
+        'message' => 'This is a simple route example',
+        'method' => Request::getMethod(),
+        'data' => Request::getQueryParams()
     ];
 });
