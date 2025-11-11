@@ -661,6 +661,17 @@ $products = Model::where([
     'featured' => 1
 ])->all();
 
+// Filter helper (alias of where) keeps chains expressive
+$products = Model::filter(['status' => 'active'])
+    ->filter('price', '>', 50)
+    ->all();
+
+// Use a callable with filter for complex logic
+$products = Model::filter(function ($query) {
+    $query->where('status', 'active')
+        ->orWhere('status', 'pending');
+})->all();
+
 // WHERE IN
 $products = Model::whereIn('id', [1, 2, 3, 4, 5])->all();
 
@@ -683,6 +694,12 @@ $products = Model::where('status', 'active')
     ->offset(20) // Skip first 20
     ->all();
 
+// Pagination aliases (skip / take)
+$products = Model::skip(20)  // same as offset(20)
+    ->take(10)               // same as limit(10)
+    ->orderBy('created_at', 'DESC')
+    ->all();
+
 // Select specific columns
 $products = Model::select(['id', 'name', 'price'])
     ->where('status', 'active')
@@ -697,6 +714,10 @@ $count = Model::where('status', 'active')->count();
 
 // Check if exists
 $exists = Model::where('id', 1)->exists();
+
+// Search across multiple columns (LIKE %term%)
+$term = 'laptop';
+$products = Model::search($term, ['name', 'description'])->all();
 ```
 
 ### Creating Records

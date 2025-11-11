@@ -31,6 +31,20 @@ $users = UsersModel::where('status', 'active')
 $users = UsersModel::where(['status' => 'active', 'verified' => 1])->all();
 ```
 
+### Filter Helper
+```php
+// Alias of where() that keeps the chain expressive
+$users = UsersModel::filter(['status' => 'active'])
+    ->filter('age', '>', 18)
+    ->all();
+
+// Use a callable for complex conditions
+$users = UsersModel::filter(function ($query) {
+    $query->where('status', 'active')
+        ->orWhere('status', 'pending');
+})->all();
+```
+
 ### Get Single Record
 ```php
 // Using where
@@ -53,6 +67,14 @@ $users = UsersModel::where('status', 'active')
     ->all();
 ```
 
+### Pagination Shortcuts (skip / take)
+```php
+$users = UsersModel::skip(20)  // same as offset(20)
+    ->take(10)                 // same as limit(10)
+    ->orderBy('created_at', 'DESC')
+    ->all();
+```
+
 ### Select Specific Columns
 ```php
 $users = UsersModel::select(['id', 'name', 'email'])
@@ -64,6 +86,20 @@ $users = UsersModel::select(['id', 'name', 'email'])
 ```php
 $count = UsersModel::where('status', 'active')->count();
 $exists = UsersModel::where('id', 1)->exists();
+```
+
+### Search Across Columns
+```php
+$term = 'john';
+
+// Generates (name LIKE '%john%' OR email LIKE '%john%')
+$users = UsersModel::search($term, ['name', 'email'])->all();
+
+// Combine with additional filters
+$users = UsersModel::filter('status', 'active')
+    ->search($term, ['name', 'email'])
+    ->take(20)
+    ->all();
 ```
 
 ### WHERE IN / WHERE NOT IN

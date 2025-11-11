@@ -24,7 +24,7 @@ Route::get('/', function () {
     return [
         'status' => 'success',
         'message' => 'Welcome to IgnitePHP API',
-        'version' => '1.2.0',
+        'version' => '1.3.0',
         'timestamp' => date('Y-m-d H:i:s')
     ];
 });

@@ -220,6 +220,21 @@ abstract class Model
     }
 
     /**
+     * Start a filter query (alias of where)
+     * Usage: UsersModel::filter(['status' => 'active'])->all()
+     */
+    public static function filter($column = null, $operator = null, $value = null): QueryBuilder
+    {
+        $query = static::where();
+
+        if ($column !== null) {
+            $query->filter($column, $operator, $value);
+        }
+
+        return $query;
+    }
+
+    /**
      * Start a query builder
      * Usage: UsersModel::where('status', 'active')->all()
      */
@@ -233,6 +248,33 @@ abstract class Model
         }
         
         return $query;
+    }
+
+    /**
+     * Add search conditions across multiple columns
+     * Usage: UsersModel::search('john', ['name', 'email'])->all()
+     */
+    public static function search(string $term, array $columns, string $boolean = 'AND'): QueryBuilder
+    {
+        return static::where()->search($term, $columns, $boolean);
+    }
+
+    /**
+     * Skip a number of records (alias of offset)
+     * Usage: UsersModel::skip(10)->take(10)->all()
+     */
+    public static function skip(int $offset): QueryBuilder
+    {
+        return static::where()->skip($offset);
+    }
+
+    /**
+     * Take a number of records (alias of limit)
+     * Usage: UsersModel::take(10)->all()
+     */
+    public static function take(int $limit): QueryBuilder
+    {
+        return static::where()->take($limit);
     }
 
     /**

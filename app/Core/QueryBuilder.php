@@ -58,6 +58,60 @@ class QueryBuilder
     }
 
     /**
+     * Convenience filter method (alias of where) that also supports callables
+     */
+    public function filter($column, $operator = null, $value = null): self
+    {
+        if ($column === null) {
+            return $this;
+        }
+
+        if (is_callable($column) && !is_string($column)) {
+            $column($this);
+            return $this;
+        }
+
+        return $this->where($column, $operator, $value);
+    }
+
+    /**
+     * Add LIKE-based search across multiple columns
+     */
+    public function search(string $term, array $columns, string $boolean = 'AND'): self
+    {
+        $term = trim($term);
+
+        if ($term === '' || empty($columns)) {
+            return $this;
+        }
+
+        $clauses = [];
+        $escaped = '%' . $this->db->escape($term) . '%';
+
+        foreach ($columns as $column) {
+            $column = trim((string)$column);
+            if ($column === '') {
+                continue;
+            }
+            $clauses[] = "`{$column}` LIKE '{$escaped}'";
+        }
+
+        if (empty($clauses)) {
+            return $this;
+        }
+
+        $logic = strtoupper($boolean) === 'OR' ? 'OR' : 'AND';
+
+        $this->where[] = [
+            'raw' => true,
+            'sql' => '(' . implode(' OR ', $clauses) . ')',
+            'logic' => $logic
+        ];
+
+        return $this;
+    }
+
+    /**
      * Add AND WHERE condition
      */
     public function andWhere(string $column, $operator = null, $value = null): self
@@ -173,6 +227,22 @@ class QueryBuilder
     }
 
     /**
+     * Alias for offset to match common pagination naming
+     */
+    public function skip(int $offset): self
+    {
+        return $this->offset($offset);
+    }
+
+    /**
+     * Alias for limit to match common pagination naming
+     */
+    public function take(int $limit): self
+    {
+        return $this->limit($limit);
+    }
+
+    /**
      * Set columns to select
      */
     public function select(array|string $columns): self
@@ -201,6 +271,12 @@ class QueryBuilder
 
         $conditions = [];
         foreach ($this->where as $index => $condition) {
+            if (!empty($condition['raw'])) {
+                $logic = $index > 0 ? ($condition['logic'] ?? '') : '';
+                $conditions[] = ($logic ? $logic . ' ' : '') . $condition['sql'];
+                continue;
+            }
+
             $column = $condition['column'];
             $operator = $condition['operator'];
             $value = $condition['value'];
