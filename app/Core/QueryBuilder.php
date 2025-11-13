@@ -20,6 +20,8 @@ class QueryBuilder
     protected ?int $offset = null;
     protected array $select = ['*'];
     protected array $with = []; // For eager loading relationships
+    protected ?string $cachedSql = null; // Cache built SQL until query changes
+    protected bool $sqlDirty = true; // Flag to rebuild SQL
 
     public function __construct(Model $model)
     {
@@ -30,6 +32,7 @@ class QueryBuilder
 
     /**
      * Add WHERE condition
+     * Optimized: Marks SQL as dirty when query changes
      */
     public function where(string $column, $operator = null, $value = null): self
     {
@@ -53,62 +56,42 @@ class QueryBuilder
             'value' => $value,
             'logic' => 'AND'
         ];
+        
+        $this->sqlDirty = true; // Mark SQL as needing rebuild
 
         return $this;
     }
-
+    
     /**
-     * Convenience filter method (alias of where) that also supports callables
+     * Filter method - supports multiple formats for better readability
+     * Usage: 
+     *   ->filter('name', 'John')
+     *   ->filter('age', '>', 20)
+     *   ->filter(['name' => 'John', 'status' => 'active'])
+     *   ->filter('age', '>20')  // Operator and value combined
      */
     public function filter($column, $operator = null, $value = null): self
     {
-        if ($column === null) {
-            return $this;
-        }
-
-        if (is_callable($column) && !is_string($column)) {
-            $column($this);
-            return $this;
-        }
-
-        return $this->where($column, $operator, $value);
-    }
-
-    /**
-     * Add LIKE-based search across multiple columns
-     */
-    public function search(string $term, array $columns, string $boolean = 'AND'): self
-    {
-        $term = trim($term);
-
-        if ($term === '' || empty($columns)) {
-            return $this;
-        }
-
-        $clauses = [];
-        $escaped = '%' . $this->db->escape($term) . '%';
-
-        foreach ($columns as $column) {
-            $column = trim((string)$column);
-            if ($column === '') {
-                continue;
+        // Support array format: filter(['name' => 'John', 'age' => '>20'])
+        if (is_array($column)) {
+            foreach ($column as $key => $val) {
+                // Check if value contains operator (e.g., '>20', '<=100')
+                if (is_string($val) && preg_match('/^(>=|<=|>|<|!=|<>)\s*(.+)$/', $val, $matches)) {
+                    $this->filter($key, $matches[1], $matches[2]);
+                } else {
+                    $this->filter($key, '=', $val);
+                }
             }
-            $clauses[] = "`{$column}` LIKE '{$escaped}'";
-        }
-
-        if (empty($clauses)) {
             return $this;
         }
-
-        $logic = strtoupper($boolean) === 'OR' ? 'OR' : 'AND';
-
-        $this->where[] = [
-            'raw' => true,
-            'sql' => '(' . implode(' OR ', $clauses) . ')',
-            'logic' => $logic
-        ];
-
-        return $this;
+        
+        // Support combined operator+value: filter('age', '>20')
+        if ($value === null && $operator !== null && is_string($operator) && preg_match('/^(>=|<=|>|<|!=|<>)\s*(.+)$/', $operator, $matches)) {
+            return $this->where($column, $matches[1], $matches[2]);
+        }
+        
+        // Standard format: filter('name', 'John') or filter('age', '>', 20)
+        return $this->where($column, $operator, $value);
     }
 
     /**
@@ -121,6 +104,7 @@ class QueryBuilder
 
     /**
      * Add OR WHERE condition
+     * Optimized: Marks SQL as dirty when query changes
      */
     public function orWhere(string $column, $operator = null, $value = null): self
     {
@@ -142,12 +126,15 @@ class QueryBuilder
             'value' => $value,
             'logic' => 'OR'
         ];
+        
+        $this->sqlDirty = true; // Mark SQL as needing rebuild
 
         return $this;
     }
 
     /**
      * Add WHERE IN condition
+     * Optimized: Marks SQL as dirty when query changes
      */
     public function whereIn(string $column, array $values): self
     {
@@ -159,6 +146,7 @@ class QueryBuilder
                 'value' => '0',
                 'logic' => 'AND'
             ];
+            $this->sqlDirty = true;
             return $this;
         }
 
@@ -172,12 +160,15 @@ class QueryBuilder
             'value' => '(' . implode(', ', $escaped) . ')',
             'logic' => 'AND'
         ];
+        
+        $this->sqlDirty = true;
 
         return $this;
     }
 
     /**
      * Add WHERE NOT IN condition
+     * Optimized: Marks SQL as dirty when query changes
      */
     public function whereNotIn(string $column, array $values): self
     {
@@ -191,12 +182,15 @@ class QueryBuilder
             'value' => '(' . implode(', ', $escaped) . ')',
             'logic' => 'AND'
         ];
+        
+        $this->sqlDirty = true;
 
         return $this;
     }
 
     /**
      * Add ORDER BY clause
+     * Optimized: Marks SQL as dirty when query changes
      */
     public function orderBy(string $column, string $direction = 'ASC'): self
     {
@@ -204,50 +198,42 @@ class QueryBuilder
             'column' => $column,
             'direction' => strtoupper($direction) === 'DESC' ? 'DESC' : 'ASC'
         ];
+        
+        $this->sqlDirty = true;
 
         return $this;
     }
 
     /**
      * Add LIMIT clause
+     * Optimized: Marks SQL as dirty when query changes
      */
     public function limit(int $limit): self
     {
         $this->limit = $limit;
+        $this->sqlDirty = true;
         return $this;
     }
 
     /**
      * Add OFFSET clause
+     * Optimized: Marks SQL as dirty when query changes
      */
     public function offset(int $offset): self
     {
         $this->offset = $offset;
+        $this->sqlDirty = true;
         return $this;
     }
 
     /**
-     * Alias for offset to match common pagination naming
-     */
-    public function skip(int $offset): self
-    {
-        return $this->offset($offset);
-    }
-
-    /**
-     * Alias for limit to match common pagination naming
-     */
-    public function take(int $limit): self
-    {
-        return $this->limit($limit);
-    }
-
-    /**
      * Set columns to select
+     * Optimized: Marks SQL as dirty when query changes
      */
     public function select(array|string $columns): self
     {
         $this->select = is_array($columns) ? $columns : [$columns];
+        $this->sqlDirty = true;
         return $this;
     }
 
@@ -259,9 +245,86 @@ class QueryBuilder
         $this->with = is_array($relations) ? $relations : [$relations];
         return $this;
     }
+    
+    /**
+     * Search across multiple columns
+     * Usage: 
+     *   ->search('john', ['name', 'email'])
+     *   ->search('john', 'name')  // Single column
+     * 
+     * Creates: WHERE (name LIKE '%john%' OR email LIKE '%john%')
+     */
+    public function search(string $term, array|string $columns): self
+    {
+        if (empty($term)) {
+            return $this;
+        }
+        
+        // Convert single column to array
+        $searchColumns = is_array($columns) ? $columns : [$columns];
+        
+        if (empty($searchColumns)) {
+            return $this;
+        }
+        
+        $db = $this->db;
+        $escapedTerm = $db->escape($term);
+        $searchTerm = "%{$escapedTerm}%";
+        
+        // Build OR conditions for each column
+        $conditions = [];
+        foreach ($searchColumns as $column) {
+            $conditions[] = "`{$column}` LIKE '{$searchTerm}'";
+        }
+        
+        // Add as a grouped OR condition
+        $this->where[] = [
+            'column' => '(' . implode(' OR ', $conditions) . ')',
+            'operator' => '',
+            'value' => '',
+            'logic' => 'AND'
+        ];
+        
+        $this->sqlDirty = true;
+        
+        return $this;
+    }
+    
+    /**
+     * Skip records (alias for offset) - better for pagination readability
+     * Usage: ->skip(10)  // Skip first 10 records
+     */
+    public function skip(int $count): self
+    {
+        return $this->offset($count);
+    }
+    
+    /**
+     * Get records from a range (for pagination)
+     * Usage: 
+     *   ->fromTo(0, 10)   // Get records 0-10 (first page, 10 items)
+     *   ->fromTo(10, 20)  // Get records 10-20 (second page, 10 items)
+     * 
+     * This sets offset and limit automatically
+     */
+    public function fromTo(int $from, int $to): self
+    {
+        $offset = $from;
+        $limit = $to - $from;
+        
+        if ($limit < 0) {
+            $limit = 0;
+        }
+        
+        $this->offset($offset);
+        $this->limit($limit);
+        
+        return $this;
+    }
 
     /**
      * Build WHERE clause SQL
+     * Optimized: Handles grouped conditions from search() method
      */
     protected function buildWhere(): string
     {
@@ -271,18 +334,16 @@ class QueryBuilder
 
         $conditions = [];
         foreach ($this->where as $index => $condition) {
-            if (!empty($condition['raw'])) {
-                $logic = $index > 0 ? ($condition['logic'] ?? '') : '';
-                $conditions[] = ($logic ? $logic . ' ' : '') . $condition['sql'];
-                continue;
-            }
-
             $column = $condition['column'];
             $operator = $condition['operator'];
             $value = $condition['value'];
             $logic = $index > 0 ? $condition['logic'] : '';
 
-            if ($operator === 'IN' || $operator === 'NOT IN') {
+            // Handle grouped conditions (from search method)
+            if (empty($operator) && empty($value) && strpos($column, '(') === 0) {
+                // This is a grouped condition like "(name LIKE '%term%' OR email LIKE '%term%')"
+                $conditions[] = ($logic ? $logic . ' ' : '') . $column;
+            } elseif ($operator === 'IN' || $operator === 'NOT IN') {
                 $conditions[] = ($logic ? $logic . ' ' : '') . "`{$column}` {$operator} {$value}";
             } else {
                 $escapedValue = is_numeric($value) ? (int)$value : "'" . $this->db->escape($value) . "'";
@@ -343,9 +404,15 @@ class QueryBuilder
 
     /**
      * Build complete SQL query
+     * Optimized: Caches SQL until query changes
      */
     protected function buildSql(): string
     {
+        // Return cached SQL if query hasn't changed
+        if (!$this->sqlDirty && $this->cachedSql !== null) {
+            return $this->cachedSql;
+        }
+        
         $select = $this->buildSelect();
         $where = $this->buildWhere();
         $orderBy = $this->buildOrderBy();
@@ -356,11 +423,16 @@ class QueryBuilder
         if ($orderBy) $sql .= ' ' . $orderBy;
         if ($limit) $sql .= ' ' . $limit;
 
+        // Cache the SQL
+        $this->cachedSql = $sql;
+        $this->sqlDirty = false;
+        
         return $sql;
     }
 
     /**
      * Execute query and return all results
+     * Optimized: Batch relationship loading, optimized object creation
      */
     public function all(): array
     {
@@ -369,13 +441,20 @@ class QueryBuilder
 
         $records = [];
         if ($result) {
+            // Optimize: Pre-fetch all rows into array first
+            $rows = [];
             while ($row = $result->fetch_assoc()) {
+                $rows[] = $row;
+            }
+            
+            // Batch create instances
+            foreach ($rows as $row) {
                 $record = $this->model->newInstance($row);
                 $records[] = $record;
             }
         }
 
-        // Eager load relationships if specified
+        // Eager load relationships if specified (optimized batch loading)
         if (!empty($this->with) && !empty($records)) {
             $this->loadRelations($records);
         }

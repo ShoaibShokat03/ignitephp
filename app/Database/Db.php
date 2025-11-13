@@ -18,7 +18,7 @@ class Db
     {
         $this->localhost = $_ENV['DATABASE_SERVER_NAME'] ?? "localhost";
         $this->username = $_ENV['DATABASE_USERNAME'] ?? "root";
-        $this->password = $_ENV['DB_PASSWORD'] ?? "";
+        $this->password = $_ENV['DATABASE_PASSWORD'] ?? $_ENV['DB_PASSWORD'] ?? "";
         $this->db = $_ENV['DATABASE_NAME'] ?? "test_db";
         $this->db_name = $this->db;
     }
@@ -62,8 +62,15 @@ class Db
         return $this->conn->error;
     }
 
-    public function escape(string $string): string
+    public function escape($string): string
     {
+        if ($string === null) {
+            return '';
+        }
+        // Convert to string if not already
+        if (!is_string($string)) {
+            $string = (string)$string;
+        }
         return $this->conn->real_escape_string($string);
     }
 }

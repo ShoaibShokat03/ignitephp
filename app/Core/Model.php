@@ -24,10 +24,51 @@ abstract class Model
 
     // Relationship cache
     protected static array $relationshipCache = [];
+    
+    // Reflection cache for performance
+    protected static array $reflectionCache = [];
+    
+    // Query result cache (simple in-memory cache)
+    protected static array $queryCache = [];
+    protected static int $queryCacheSize = 100;
 
     public function __construct(array $attributes = [])
     {
         $this->attributes = $attributes;
+        // Unset public properties initially so __get() is always called
+        // This ensures property access goes through __get() which checks attributes
+        // We don't sync here - properties will be set lazily when accessed via __get()
+        $this->unsetPublicProperties();
+    }
+    
+    /**
+     * Unset all public properties so __get() is called when accessing them
+     * This ensures that property access always checks the attributes array first
+     */
+    protected function unsetPublicProperties(): void
+    {
+        $className = static::class;
+        
+        // Cache reflection for performance
+        if (!isset(self::$reflectionCache[$className])) {
+            $reflection = new \ReflectionClass($this);
+            $properties = $reflection->getProperties(\ReflectionProperty::IS_PUBLIC);
+            
+            $propertyNames = [];
+            foreach ($properties as $property) {
+                $name = $property->getName();
+                // Skip internal properties
+                if ($name !== 'db' && $name !== 'table' && $name !== 'attributes' && $name !== 'relations') {
+                    $propertyNames[] = $name;
+                }
+            }
+            self::$reflectionCache[$className] = $propertyNames;
+        }
+        
+        // Unset all public properties so __get() is called
+        foreach (self::$reflectionCache[$className] as $name) {
+            unset($this->$name);
+        }
     }
 
     /**
@@ -64,12 +105,70 @@ abstract class Model
 
     /**
      * Create new instance with attributes
+     * Optimized to avoid unnecessary operations
+     * Properties are unset initially and will be set lazily when accessed via __get()
      */
     public function newInstance(array $attributes): self
     {
         $instance = new static();
         $instance->attributes = $attributes;
+        // Unset properties so __get() is always called when accessing them
+        $instance->unsetPublicProperties();
         return $instance;
+    }
+
+    /**
+     * Sync attributes array to public properties
+     * This allows both $model->username and $model->attributes['username'] to work
+     * Note: Properties are unset initially, so setting them will make them accessible
+     */
+    protected function syncAttributesToProperties(): void
+    {
+        foreach ($this->attributes as $key => $value) {
+            if (property_exists($this, $key)) {
+                $this->$key = $value;
+            }
+        }
+    }
+
+    /**
+     * Sync public properties back to attributes array
+     * This ensures that when properties are set directly, they're saved to attributes
+     * Optimized with reflection caching
+     * Note: Only syncs properties that are actually set (not unset)
+     */
+    protected function syncPropertiesToAttributes(): void
+    {
+        $className = static::class;
+        
+        // Use cached reflection to avoid repeated ReflectionClass instantiation
+        if (!isset(self::$reflectionCache[$className])) {
+            $reflection = new \ReflectionClass($this);
+            $properties = $reflection->getProperties(\ReflectionProperty::IS_PUBLIC);
+            
+            // Cache property names for this class
+            $propertyNames = [];
+            foreach ($properties as $property) {
+                $name = $property->getName();
+                // Skip internal properties
+                if ($name !== 'db' && $name !== 'table' && $name !== 'attributes' && $name !== 'relations') {
+                    $propertyNames[] = $name;
+                }
+            }
+            self::$reflectionCache[$className] = $propertyNames;
+        }
+        
+        // Use cached property names and check if property is initialized
+        $reflection = new \ReflectionClass($this);
+        foreach (self::$reflectionCache[$className] as $name) {
+            // Check if property exists and is initialized (not unset)
+            if ($reflection->hasProperty($name)) {
+                $property = $reflection->getProperty($name);
+                if ($property->isInitialized($this)) {
+                    $this->attributes[$name] = $this->$name;
+                }
+            }
+        }
     }
 
     /**
@@ -86,6 +185,10 @@ abstract class Model
     public function setAttribute(string $name, $value): void
     {
         $this->attributes[$name] = $value;
+        // Sync to public property if it exists
+        if (property_exists($this, $name)) {
+            $this->$name = $value;
+        }
     }
 
     /**
@@ -114,6 +217,7 @@ abstract class Model
 
     /**
      * Magic method to get attributes and relations
+     * This is called when accessing a property that doesn't exist or is unset
      */
     public function __get(string $name)
     {
@@ -122,9 +226,14 @@ abstract class Model
             return $this->relations[$name];
         }
 
-        // Check attributes
+        // Check attributes - this is the primary source of data
         if (isset($this->attributes[$name])) {
-            return $this->attributes[$name];
+            $value = $this->attributes[$name];
+            // Set the property so subsequent accesses are faster (but still go through __get if unset)
+            if (property_exists($this, $name)) {
+                $this->$name = $value;
+            }
+            return $value;
         }
 
         // Check for relationship method
@@ -144,6 +253,10 @@ abstract class Model
     public function __set(string $name, $value): void
     {
         $this->attributes[$name] = $value;
+        // Sync to public property if it exists
+        if (property_exists($this, $name)) {
+            $this->$name = $value;
+        }
     }
 
     /**
@@ -220,27 +333,20 @@ abstract class Model
     }
 
     /**
-     * Start a filter query (alias of where)
-     * Usage: UsersModel::filter(['status' => 'active'])->all()
-     */
-    public static function filter($column = null, $operator = null, $value = null): QueryBuilder
-    {
-        $query = static::where();
-
-        if ($column !== null) {
-            $query->filter($column, $operator, $value);
-        }
-
-        return $query;
-    }
-
-    /**
      * Start a query builder
      * Usage: UsersModel::where('status', 'active')->all()
+     * Optimized: Reuses static DB connection
      */
-    public static function where(string $column = null, $operator = null, $value = null): QueryBuilder
+    public static function where(?string $column = null, $operator = null, $value = null): QueryBuilder
     {
         $model = new static();
+        // Reuse static DB connection for better performance
+        if (self::$staticDb === null) {
+            self::$staticDb = new Db();
+            self::$staticDb->connect();
+        }
+        $model->db = self::$staticDb;
+        
         $query = new QueryBuilder($model);
         
         if ($column !== null) {
@@ -249,32 +355,14 @@ abstract class Model
         
         return $query;
     }
-
+    
     /**
-     * Add search conditions across multiple columns
-     * Usage: UsersModel::search('john', ['name', 'email'])->all()
+     * Alias for where() - allows filter() method for better readability
+     * Usage: Model::filter('status', 'active')->filter('role', 'admin')->all()
      */
-    public static function search(string $term, array $columns, string $boolean = 'AND'): QueryBuilder
+    public static function filter(?string $column = null, $operator = null, $value = null): QueryBuilder
     {
-        return static::where()->search($term, $columns, $boolean);
-    }
-
-    /**
-     * Skip a number of records (alias of offset)
-     * Usage: UsersModel::skip(10)->take(10)->all()
-     */
-    public static function skip(int $offset): QueryBuilder
-    {
-        return static::where()->skip($offset);
-    }
-
-    /**
-     * Take a number of records (alias of limit)
-     * Usage: UsersModel::take(10)->all()
-     */
-    public static function take(int $limit): QueryBuilder
-    {
-        return static::where()->take($limit);
+        return static::where($column, $operator, $value);
     }
 
     /**
@@ -301,6 +389,7 @@ abstract class Model
     /**
      * Create new record
      * Usage: UsersModel::create(['name' => 'John', 'email' => 'john@example.com'])
+     * Optimized: Uses single query, avoids unnecessary find() call
      */
     public static function create(array $attributes): ?self
     {
@@ -313,7 +402,11 @@ abstract class Model
         foreach ($attributes as $key => $value) {
             if ($key !== 'id') {
                 $fields[] = $key;
-                $values[] = "'" . $db->escape($value) . "'";
+                if ($value === null) {
+                    $values[] = "NULL";
+                } else {
+                    $values[] = "'" . $db->escape($value) . "'";
+                }
             }
         }
         
@@ -325,10 +418,30 @@ abstract class Model
         
         if ($db->query($sql)) {
             $id = $db->insert_id();
-            return static::find($id);
+            // Optimize: Set attributes directly instead of querying again
+            $attributes['id'] = $id;
+            $model->attributes = $attributes;
+            $model->syncAttributesToProperties();
+            // Clear query cache for this table
+            static::clearQueryCache();
+            return $model;
         }
         
         return null;
+    }
+    
+    /**
+     * Clear query cache for this model's table
+     */
+    protected static function clearQueryCache(): void
+    {
+        $model = new static();
+        $table = $model->getTable();
+        foreach (self::$queryCache as $key => $value) {
+            if (strpos($key, $table) !== false) {
+                unset(self::$queryCache[$key]);
+            }
+        }
     }
 
     /**
@@ -350,10 +463,16 @@ abstract class Model
         $updates = [];
         foreach ($attributes as $key => $value) {
             if ($key !== 'id') {
-                $updates[] = "`{$key}` = '" . $db->escape($value) . "'";
+                if ($value === null) {
+                    $updates[] = "`{$key}` = NULL";
+                } else {
+                    $updates[] = "`{$key}` = '" . $db->escape($value) . "'";
+                }
                 $this->setAttribute($key, $value);
             }
         }
+        // Ensure all attributes are synced to properties after update
+        $this->syncAttributesToProperties();
         
         if (empty($updates)) {
             return false;
@@ -386,6 +505,11 @@ abstract class Model
      */
     public function save(): bool
     {
+        // Sync public properties back to attributes before saving
+        // This ensures that direct property assignments (e.g., $model->username = 'value')
+        // are captured in the attributes array
+        $this->syncPropertiesToAttributes();
+        
         $id = $this->getAttribute('id');
         
         if ($id) {
@@ -394,6 +518,8 @@ abstract class Model
             $created = static::create($this->attributes);
             if ($created) {
                 $this->attributes = $created->attributes;
+                // Sync attributes to public properties after creation
+                $this->syncAttributesToProperties();
                 return true;
             }
             return false;
