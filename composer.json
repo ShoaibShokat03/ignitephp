@@ -2,7 +2,7 @@
   "name": "ignitephp/project",
   "description": "IgnitePHP starter project",
   "type": "project",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "license": "MIT",
   "authors": [
     {
